@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTRL+ANIME | Seu portal otaku</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Fonte neon do logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       CTRL+ANIME - CSS
+       Tudo está dentro deste index.html de propósito.
+       ========================================================= */
+
+    :root {
+      --bg: #05060d;
+      --bg-2: #090b16;
+      --card: #0d1120;
+      --card-2: #11172a;
+      --purple: #8b5cf6;
+      --pink: #d946ef;
+      --blue: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(139, 92, 246, .25);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(139, 92, 246, .12), transparent 25%),
+        radial-gradient(circle at 85% 25%, rgba(56, 189, 248, .08), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; }
+
+    .navbar {
+      background: rgba(5, 6, 13, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-brand {
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #fff !important;
+    }
+
+    .brand-glow {
+      color: var(--purple);
+      text-shadow: 0 0 20px rgba(139, 92, 246, .7);
+    }
+
+    /* ===== LOGO NEON (texto) ===== */
+    .brand-neon {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow:
+        0 0 4px #fff,
+        0 0 12px var(--purple),
+        0 0 26px var(--purple),
+        0 0 44px var(--pink);
+      animation: neonPulse 3.5s ease-in-out infinite;
+    }
+
+    .brand-neon .brand-plus {
+      color: var(--blue);
+      text-shadow:
+        0 0 6px var(--blue),
+        0 0 18px var(--blue),
+        0 0 34px var(--blue);
+      margin: 0 2px;
+    }
+
+    .brand-neon .brand-anime {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 10px rgba(217, 70, 239, .8));
+      text-shadow: none;
+    }
+
+    @keyframes neonPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .88; }
+      52% { opacity: .96; }
+    }
+
+    @media (max-width: 480px) {
+      .brand-neon { font-size: 1.3rem; letter-spacing: 2px; }
+    }
+
+    .nav-link {
+      color: #cbd5e1 !important;
+      font-size: .9rem;
+    }
+
+    .nav-link:hover {
+      color: #fff !important;
+    }
+
+    .search-box {
+      background: #0c1020;
+      border: 1px solid var(--border);
+      color: white;
+    }
+
+    .search-box:focus {
+      background: #0c1020;
+      color: white;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 .2rem rgba(139, 92, 246, .15);
+    }
+
+    /* ===== LISTA DA PESQUISA AO VIVO ===== */
+    .search-wrap { position: relative; }
+
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 380px;
+      max-width: 92vw;
+      max-height: 70vh;
+      overflow-y: auto;
+      background: #090d1b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 20px 45px rgba(0,0,0,.6), 0 0 25px rgba(139,92,246,.2);
+      padding: 6px;
+      z-index: 2000;
+    }
+
+    .search-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .search-item:hover { background: rgba(139, 92, 246, .16); }
+
+    .search-item img {
+      width: 38px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .search-item small { color: var(--muted); }
+
+    .search-more {
+      text-align: center;
+      padding: 10px;
+      color: #ddd6fe;
+      font-weight: 700;
+      cursor: pointer;
+      border-top: 1px solid rgba(148,163,184,.12);
+      margin-top: 4px;
+    }
+
+    .search-more:hover { color: #fff; }
+
+    @media (max-width: 991px) {
+      .search-dropdown { width: 100%; max-width: 100%; }
+    }
+
+    .hero {
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(5,6,13,.98) 0%, rgba(5,6,13,.78) 42%, rgba(5,6,13,.2) 100%),
+        linear-gradient(0deg, var(--bg) 0%, transparent 25%),
+        url("https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=2200&q=85") center/cover;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      padding-top: 90px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: .85;
+      font-weight: 1000;
+      letter-spacing: -4px;
+      margin: 18px 0;
+    }
+
+    .hero h1 span {
+      color: var(--purple);
+      text-shadow: 0 0 35px rgba(139, 92, 246, .65);
+    }
+
+    .eyebrow {
+      color: #c4b5fd;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .hero-description {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 620px;
+    }
+
+    .btn-neon {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      border: 0;
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 0 30px rgba(139, 92, 246, .25);
+    }
+
+    .btn-neon:hover {
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(139, 92, 246, .45);
+    }
+
+    .btn-outline-neon {
+      border: 1px solid var(--purple);
+      color: #ddd6fe;
+      font-weight: 700;
+    }
+
+    .btn-outline-neon:hover {
+      background: rgba(139, 92, 246, .14);
+      color: white;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .anime-card {
+      background: linear-gradient(180deg, rgba(17,23,42,.95), rgba(8,11,22,.95));
+      border: 1px solid rgba(139, 92, 246, .18);
+      border-radius: 18px;
+      overflow: hidden;
+      height: 100%;
+      transition: .3s;
+      cursor: pointer;
+    }
+
+    .anime-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(139, 92, 246, .7);
+      box-shadow: 0 20px 45px rgba(0,0,0,.45), 0 0 25px rgba(139,92,246,.12);
+    }
+
+    .anime-poster {
+      height: 300px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .anime-card-body {
+      padding: 18px;
+    }
+
+    .anime-card h5 {
+      font-weight: 900;
+    }
+
+    .badge-soft {
+      background: rgba(139,92,246,.12);
+      border: 1px solid rgba(139,92,246,.3);
+      color: #ddd6fe;
+    }
+
+    .rating {
+      color: #facc15;
+      font-weight: 800;
+    }
+
+    .genre-pills .btn {
+      margin: 5px;
+      border-radius: 999px;
+    }
+
+    .classics-strip {
+      background: linear-gradient(90deg, rgba(139,92,246,.12), rgba(56,189,248,.08));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .character-card {
+      background: #0b1020;
+      border: 1px solid rgba(139,92,246,.22);
+      border-radius: 18px;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .character-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .character-info {
+      padding: 16px;
+    }
+
+    .character-info h5 {
+      font-weight: 900;
+    }
+
+    .info-box {
+      background: rgba(13,17,32,.85);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      height: 100%;
+    }
+
+    .info-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(148,163,184,.1);
+    }
+
+    .info-line:last-child {
+      border-bottom: 0;
+    }
+
+    .info-line span:first-child {
+      color: var(--muted);
+    }
+
+    .progress {
+      height: 8px;
+      background: #171d31;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+    }
+
+    .curiosity-card {
+      background: linear-gradient(145deg, #10162a, #080b16);
+      border: 1px solid rgba(56,189,248,.15);
+      border-radius: 16px;
+      padding: 22px;
+      height: 100%;
+    }
+
+    .curiosity-number {
+      color: var(--blue);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .forum-card {
+      background: #0b1020;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .form-control,
+    .form-select {
+      background: #080c18;
+      border: 1px solid rgba(148,163,184,.2);
+      color: white;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      background: #080c18;
+      color: white;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 .2rem rgba(139,92,246,.12);
+    }
+
+    .comment {
+      border-left: 3px solid var(--purple);
+      background: rgba(139,92,246,.05);
+      border-radius: 0 12px 12px 0;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .comment small {
+      color: var(--muted);
+    }
+
+    .footer {
+      background: #03040a;
+      border-top: 1px solid var(--border);
+      padding: 55px 0 25px;
+    }
+
+    .modal-content {
+      background: #090d1b;
+      border: 1px solid var(--border);
+      color: white;
+      border-radius: 20px;
+    }
+
+    .btn-close {
+      filter: invert(1);
+    }
+
+    .anime-detail {
+      display: none;
+      padding-top: 90px;
+      min-height: 100vh;
+    }
+
+    .detail-banner {
+      min-height: 420px;
+      display: flex;
+      align-items: end;
+      padding: 60px 0 50px;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .detail-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(0deg, #05060d 0%, rgba(5,6,13,.5) 55%, rgba(5,6,13,.15) 100%),
+        linear-gradient(90deg, rgba(5,6,13,.95), rgba(5,6,13,.2));
+    }
+
+    .detail-banner > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .detail-title {
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 1000;
+      margin: 0;
+    }
+
+    .back-btn {
+      margin-bottom: 25px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .empty-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 650px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .anime-poster {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#inicio" onclick="showHome()" aria-label="CTRL+ANIME - início">
+      <span class="brand-neon">CTRL<span class="brand-plus">+</span><span class="brand-anime">ANIME</span></span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#inicio" onclick="showHome()">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#populares" onclick="showHome()">Populares</a></li>
+        <li class="nav-item"><a class="nav-link" href="#classicos" onclick="showHome()">Clássicos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#generos" onclick="showHome()">Gêneros</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ranking" onclick="showHome()">Ranking</a></li>
+        <li class="nav-item"><a class="nav-link" href="#forum" onclick="showHome()">Fórum</a></li>
+      </ul>
+
+      <form class="d-flex search-wrap" autocomplete="off" onsubmit="event.preventDefault(); submitSearch();">
+        <input id="searchInput" class="form-control form-control-sm search-box me-2"
+               type="search" placeholder="Buscar anime..." oninput="liveSearch()" onfocus="liveSearch()">
+        <button class="btn btn-sm btn-neon" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+        <div id="searchDropdown" class="search-dropdown hidden"></div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- =========================================================
+     HOME
+     ========================================================= -->
+<main id="homePage">
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow">⚡ Anime da semana</div>
+        <h1>ONE <span>PIECE</span></h1>
+        <p class="hero-description">
+          Explore histórias, personagens, curiosidades e mundos que marcaram gerações.
+          Descubra seu próximo anime favorito no CTRL+ANIME.
+        </p>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge badge-soft rounded-pill p-2">Aventura</span>
+          <span class="badge badge-soft rounded-pill p-2">Ação</span>
+          <span class="badge badge-soft rounded-pill p-2">Shounen</span>
+          <span class="rating">★ 9.8</span>
+        </div>
+
+        <button class="btn btn-neon btn-lg me-2" onclick="openAnime('One Piece')">
+          <i class="bi bi-stars"></i> Explorar anime
+        </button>
+
+        <a href="#populares" class="btn btn-outline-neon btn-lg">
+          Ver populares
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS DA PESQUISA -->
+  <section id="searchSection" class="section hidden">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+        <div>
+          <h2 class="section-title" id="searchTitle"></h2>
+          <p class="section-subtitle">Animes que combinam com a sua pesquisa.</p>
+        </div>
+        <button class="btn btn-sm btn-outline-neon" onclick="clearSearch()">✕ Limpar pesquisa</button>
+      </div>
+      <div id="searchGrid" class="row g-4"></div>
+    </div>
+  </section>
+
+  <!-- POPULARES -->
+  <section id="populares" class="section">
+    <div class="container">
+      <h2 class="section-title">🔥 Animes populares</h2>
+      <p class="section-subtitle">Alguns dos maiores nomes do universo otaku.</p>
+      <div id="popularGrid" class="row g-4"></div>
+    </div>
+  </section>
+
+  <!-- GÊNEROS -->
+  <section id="generos" class="section pt-0">
+    <div class="container">
+      <h2 class="section-title">🎭 Explore por gênero</h2>
+      <p class="section-subtitle">Escolha uma vibe e descubra novos mundos.</p>
+
+      <div class="genre-pills mb-4">
+        <button class="btn btn-outline-neon" onclick="filterGenre('Todos')">Todos</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Ação')">⚔️ Ação</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Aventura')">🌎 Aventura</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Romance')">❤️ Romance</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Comédia')">😂 Comédia</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Fantasia')">✨ Fantasia</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Terror')">👻 Terror</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Mistério')">🔍 Mistério</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Esporte')">🏐 Esporte</button>
+        <button class="btn btn-outline-neon" onclick="filterGenre('Pokémon')">🎮 Pokémon</button>
+      </div>
+
+      <div id="genreGrid" class="row g-4"></div>
+    </div>
+  </section>
+
+  <!-- CLÁSSICOS -->
+  <section id="classicos" class="section classics-strip">
+    <div class="container">
+      <h2 class="section-title">👑 Clássicos que marcaram gerações</h2>
+      <p class="section-subtitle">Uma viagem pelos animes que ajudaram a construir a cultura otaku.</p>
+
+      <div id="classicCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="classicSlides"></div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#classicCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#classicCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAGENS EM DESTAQUE -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">👤 Personagens em destaque</h2>
+      <p class="section-subtitle">Alguns rostos que você provavelmente conhece.</p>
+
+      <div id="characterHomeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="characterSlides"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#characterHomeCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#characterHomeCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING -->
+  <section id="ranking" class="section pt-0">
+    <div class="container">
+      <h2 class="section-title">🏆 Ranking do CTRL+ANIME</h2>
+      <p class="section-subtitle">Uma lista demonstrativa baseada nas notas cadastradas no projeto.</p>
+
+      <div class="list-group" id="rankingList"></div>
+    </div>
+  </section>
+
+  <!-- CURIOSIDADES -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">💡 Você sabia?</h2>
+      <p class="section-subtitle">Pequenas curiosidades para deixar sua visita ainda mais interessante.</p>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="curiosity-card">
+            <div class="curiosity-number">01</div>
+            <h5>Anime</h5>
+            <p class="text-secondary">O termo anime é utilizado principalmente para animações produzidas no Japão ou em estilo associado à animação japonesa.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="curiosity-card">
+            <div class="curiosity-number">02</div>
+            <h5>Mangá</h5>
+            <p class="text-secondary">Muitos animes famosos são adaptações de mangás, mas também existem obras originais criadas diretamente para a animação.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="curiosity-card">
+            <div class="curiosity-number">03</div>
+            <h5>Gêneros</h5>
+            <p class="text-secondary">Um mesmo anime pode misturar ação, aventura, comédia, romance, fantasia e vários outros gêneros.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FÓRUM -->
+  <section id="forum" class="section">
+    <div class="container">
+      <div class="row g-4">
+
+        <div class="col-lg-5">
+          <div class="forum-card h-100">
+            <span class="eyebrow">💬 Comunidade</span>
+            <h2 class="section-title mt-2">Fórum CTRL+ANIME</h2>
+            <p class="text-secondary">
+              Terminou um anime? Conta pra comunidade o que achou, recomendações,
+              personagens favoritos e o que vale a pena assistir.
+            </p>
+
+            <form id="commentForm">
+              <div class="mb-3">
+                <label class="form-label">Seu nome</label>
+                <input id="commentName" class="form-control" required maxlength="30" placeholder="Ex.: Thavine">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Anime</label>
+                <select id="commentAnime" class="form-select" required></select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Sua recomendação</label>
+                <textarea id="commentText" class="form-control" rows="5" required maxlength="500"
+                  placeholder="O que você achou desse anime? Recomendaria?"></textarea>
+              </div>
+
+              <button class="btn btn-neon w-100" type="submit">
+                <i class="bi bi-send"></i> Publicar comentário
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="forum-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div>
+                <h3 class="fw-bold mb-1">💜 O que a galera está dizendo</h3>
+                <small class="text-secondary">Comentários salvos neste navegador.</small>
+              </div>
+              <button class="btn btn-sm btn-outline-danger" onclick="clearComments()">
+                Limpar
+              </button>
+            </div>
+
+            <div id="commentsList"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     PÁGINA DINÂMICA DO ANIME
+     ========================================================= -->
+<section id="animePage" class="anime-detail">
+
+  <div id="detailBanner" class="detail-banner">
+    <div class="container">
+      <button class="btn btn-outline-neon back-btn" onclick="showHome()">
+        <i class="bi bi-arrow-left"></i> Voltar para o CTRL+ANIME
+      </button>
+
+      <div id="detailContent"></div>
+    </div>
+  </div>
+
+  <div class="container section">
+
+    <!-- SOBRE -->
+    <div class="row g-4 mb-5">
+      <div class="col-lg-8">
+        <h2 class="section-title">📖 Sobre o anime</h2>
+        <p id="detailSynopsis" class="text-secondary fs-5"></p>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="info-box" id="detailInfo"></div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <ul class="nav nav-pills mb-4" id="animeTabs">
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#charactersTab">
+          👥 Personagens
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#curiositiesTab">
+          💡 Curiosidades
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#attributesTab">
+          📊 Atributos
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- PERSONAGENS -->
+      <div class="tab-pane fade show active" id="charactersTab">
+        <h2 class="section-title mb-4">👥 Personagens principais</h2>
+
+        <div id="detailCharacterCarousel" class="carousel slide">
+          <div class="carousel-inner" id="detailCharacterSlides"></div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#detailCharacterCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button class="carousel-control-next" type="button" data-bs-target="#detailCharacterCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CURIOSIDADES -->
+      <div class="tab-pane fade" id="curiositiesTab">
+        <h2 class="section-title mb-4">💡 Curiosidades</h2>
+        <div id="detailCuriosities" class="row g-4"></div>
+      </div>
+
+      <!-- ATRIBUTOS -->
+      <div class="tab-pane fade" id="attributesTab">
+        <h2 class="section-title mb-4">📊 Perfil do anime</h2>
+        <div class="info-box">
+          <div id="detailAttributes"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TRAILER -->
+    <div class="mt-5">
+      <h2 class="section-title">🎬 Trailer / destaque</h2>
+      <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-secondary">
+        <iframe id="detailTrailer"
+          src="https://www.youtube.com/embed/ScMzIvxBSi4"
+          title="Trailer"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- RECOMENDADOS -->
+    <div class="mt-5">
+      <h2 class="section-title">✨ Você também pode gostar</h2>
+      <div id="relatedGrid" class="row g-4"></div>
+    </div>
+
+    <!-- FÓRUM DO ANIME -->
+    <div class="mt-5">
+      <div class="forum-card">
+        <h2 class="section-title">💬 Fale sobre este anime</h2>
+        <p class="text-secondary">Sua opinião pode aparecer no fórum da página inicial.</p>
+        <button class="btn btn-neon" onclick="goToForum()">
+          Ir para o fórum
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL PERSONAGEM -->
+<div class="modal fade" id="characterModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title" id="modalCharacterName"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-4">
+          <div class="col-md-5">
+            <img id="modalCharacterImage" class="img-fluid rounded-4" alt="Personagem">
+          </div>
+
+          <div class="col-md-7">
+            <p id="modalCharacterDescription" class="text-secondary"></p>
+            <div id="modalCharacterInfo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-5">
+        <h3><span class="brand-neon" style="font-size:1.6rem">CTRL<span class="brand-plus">+</span><span class="brand-anime">ANIME</span></span></h3>
+        <p class="text-secondary">
+          Onde histórias, personagens e fãs se encontram.
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="fw-bold">Explorar</h6>
+        <a class="d-block text-secondary mb-2" href="#populares">Populares</a>
+        <a class="d-block text-secondary mb-2" href="#classicos">Clássicos</a>
+        <a class="d-block text-secondary mb-2" href="#generos">Gêneros</a>
+        <a class="d-block text-secondary mb-2" href="#ranking">Ranking</a>
+      </div>
+
+      <div class="col-md-4">
+        <h6 class="fw-bold">Comunidade</h6>
+        <p class="text-secondary mb-1">💬 Fórum de recomendações</p>
+        <p class="text-secondary mb-1">⭐ Descubra novos animes</p>
+        <p class="text-secondary">🎌 Explore personagens</p>
+      </div>
+
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <p class="text-center text-secondary mb-0">
+      © 2026 CTRL+ANIME — Projeto acadêmico.
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* =========================================================
+   CTRL+ANIME - JAVASCRIPT
+   ========================================================= */
+
+const img = (text, color = "111827") =>
+  `https://placehold.co/700x900/${color}/ffffff?text=${encodeURIComponent(text)}`;
+
+const banner = (text, color = "090b16") =>
+  `https://placehold.co/1800x700/${color}/ffffff?text=${encodeURIComponent(text)}`;
+
+/*
+  Atalhos para cadastrar mais rápido:
+  P(...) = personagem  |  A(...) = anime
+  Para adicionar um anime novo, copie uma linha A(...) e altere os dados.
+*/
+const P = (nome, papel, extra, cor, descricao, idade = "Não especificada", altura = "Não especificada") =>
+  ({ nome, papel, extra, idade, altura, descricao, img: img(nome.toUpperCase(), cor) });
+
+const A = (nome, nota, tipo, generos, ano, estudio, episodios, cor, sinopse, curiosidades, atributos, personagens) =>
+  ({ nome, nota, tipo, generos, ano, estudio, episodios,
+     poster: img(nome.toUpperCase(), cor), banner: banner(nome.toUpperCase(), cor),
+     sinopse, curiosidades, atributos, personagens });
+
+const animes = [
+
+  A("One Piece", 9.8, "Clássico / Popular", ["Aventura", "Ação", "Comédia", "Shounen"], "1999", "Toei Animation", "1100+", "7f1d1d",
+    "Monkey D. Luffy parte para o mar com o sonho de encontrar o lendário One Piece e se tornar o Rei dos Piratas.",
+    ["Luffy nasceu em 5 de maio.", "O anime começou em 1999.", "A tripulação dos Chapéus de Palha reúne personagens com habilidades muito diferentes.", "A obra mistura aventura, comédia, drama e batalhas."],
+    { Aventura: 100, Ação: 95, Comédia: 88, Drama: 91, Fantasia: 90 },
+    [
+      P("Monkey D. Luffy", "Capitão", "Chapéus de Palha", "7f1d1d", "Capitão dos Chapéus de Palha e protagonista da história. Sonha em encontrar o One Piece e se tornar o Rei dos Piratas.", "19 anos", "174 cm"),
+      P("Roronoa Zoro", "Espadachim", "Três espadas", "14532d", "Espadachim da tripulação e um dos combatentes mais importantes dos Chapéus de Palha.", "21 anos", "181 cm"),
+      P("Nami", "Navegadora", "Navegação", "9a3412", "Navegadora dos Chapéus de Palha. Seu talento permite que a tripulação atravesse mares perigosos.", "20 anos", "170 cm"),
+      P("Sanji", "Cozinheiro", "Black Leg", "172554", "Cozinheiro da tripulação e um habilidoso lutador especializado em técnicas com as pernas.", "21 anos", "180 cm"),
+      P("Tony Tony Chopper", "Médico", "Médico", "164e63", "Uma rena que comeu uma Akuma no Mi e se tornou o médico da tripulação.", "17 anos", "90 cm"),
+      P("Usopp", "Atirador", "Sniper", "92400e", "Atirador e grande contador de histórias, sonha em se tornar um bravo guerreiro do mar."),
+      P("Nico Robin", "Arqueóloga", "Poneglyphs", "4c1d95", "Arqueóloga da tripulação, busca desvendar os mistérios da história perdida do mundo."),
+      P("Franky", "Carpinteiro", "Ciborgue", "0369a1", "Carpinteiro ciborgue que construiu o navio Thousand Sunny."),
+      P("Brook", "Músico", "Rei das Almas", "334155", "Músico esqueleto que ganhou uma segunda vida graças a uma Akuma no Mi."),
+      P("Jinbe", "Timoneiro", "Karatê Homem-Peixe", "1e3a8a", "Homem-peixe mestre de caratê, ex-Shichibukai e timoneiro da tripulação."),
+      P("Portgas D. Ace", "Irmão de Luffy", "Mera Mera no Mi", "c2410c", "Irmão adotivo de Luffy e comandante dos Piratas de Barba Branca."),
+      P("Sabo", "Revolucionário", "Exército Revolucionário", "1e293b", "Irmão de Luffy e Ace, hoje chefe do Estado-Maior do Exército Revolucionário."),
+      P("Shanks", "Yonkou", "Cabelo Vermelho", "991b1b", "Pirata lendário que inspirou Luffy e deixou seu chapéu de palha com ele."),
+      P("Trafalgar Law", "Capitão", "Ope Ope no Mi", "ca8a04", "Capitão dos Piratas do Coração, médico e usuário da Ope Ope no Mi."),
+      P("Boa Hancock", "Imperatriz Pirata", "Mero Mero no Mi", "be185d", "Imperatriz de Amazon Lily, conhecida por sua beleza e grande poder.")
+    ]),
+
+  A("Naruto", 9.5, "Clássico", ["Ação", "Aventura", "Shounen"], "2002", "Pierrot", "720", "1e3a8a",
+    "Naruto Uzumaki cresce em Konoha sonhando em se tornar Hokage e conquistar o reconhecimento de sua vila.",
+    ["Naruto nasceu em 10 de outubro.", "A história acompanha várias gerações de ninjas.", "A Vila da Folha é um dos principais cenários da obra.", "A amizade e a rivalidade entre Naruto e Sasuke são centrais na história."],
+    { Ação: 96, Aventura: 95, Drama: 94, Comédia: 80, Estratégia: 92 },
+    [
+      P("Naruto Uzumaki", "Protagonista", "Jinchuuriki", "1e3a8a", "Um jovem ninja determinado a se tornar Hokage e ser reconhecido por sua vila.", "17 anos", "166 cm"),
+      P("Sasuke Uchiha", "Rival", "Clã Uchiha", "312e81", "Um dos últimos membros do clã Uchiha e principal rival de Naruto.", "17 anos", "168 cm"),
+      P("Sakura Haruno", "Kunoichi", "Ninja médica", "be185d", "Kunoichi da Equipe 7 que desenvolve grande força e habilidades médicas.", "17 anos", "161 cm"),
+      P("Kakashi Hatake", "Sensei", "Sharingan", "334155", "Professor da Equipe 7 e um dos ninjas mais conhecidos de Konoha.", "31 anos", "181 cm"),
+      P("Itachi Uchiha", "Shinobi", "Akatsuki", "3f0f46", "Um personagem central na história do clã Uchiha e irmão mais velho de Sasuke.", "21 anos", "178 cm"),
+      P("Shikamaru Nara", "Estrategista", "Clã Nara", "334155", "Gênio estratégico de Konoha, mestre da técnica das sombras."),
+      P("Hinata Hyuga", "Kunoichi", "Byakugan", "7c3aed", "Kunoichi gentil do clã Hyuga que admira Naruto desde criança."),
+      P("Rock Lee", "Especialista em taijutsu", "Oito Portões", "166534", "Ninja que domina o taijutsu à base de muito esforço e determinação."),
+      P("Neji Hyuga", "Prodígio", "Byakugan", "475569", "Prodígio do clã Hyuga, conhecido pelo estilo Punho Gentil."),
+      P("Gaara", "Kazekage", "Areia", "9a3412", "Ninja da Vila da Areia que se torna Kazekage e grande aliado de Naruto."),
+      P("Jiraiya", "Sannin Lendário", "Modo Sábio", "166534", "Mestre de Naruto, escritor e um dos três Sannin lendários."),
+      P("Tsunade", "Quinta Hokage", "Ninja médica", "ca8a04", "Quinta Hokage e uma das maiores ninjas médicas do mundo."),
+      P("Orochimaru", "Sannin", "Técnicas proibidas", "3f0f46", "Ex-Sannin obcecado por técnicas proibidas e pela imortalidade."),
+      P("Minato Namikaze", "Quarto Hokage", "Flash Amarelo", "ca8a04", "Quarto Hokage e pai de Naruto, famoso pela enorme velocidade."),
+      P("Kurama", "Raposa de Nove Caudas", "Bijuu", "c2410c", "A poderosa Raposa de Nove Caudas selada dentro de Naruto.")
+    ]),
+
+  A("Dragon Ball Z", 9.4, "Clássico", ["Ação", "Aventura", "Comédia", "Shounen"], "1989", "Toei Animation", "291", "b45309",
+    "Goku e seus amigos enfrentam inimigos cada vez mais poderosos enquanto protegem a Terra e exploram os limites de suas habilidades.",
+    ["Dragon Ball Z é continuação de Dragon Ball.", "As transformações Super Saiyajin são um dos elementos mais conhecidos da franquia.", "Goku é um Saiyajin criado na Terra.", "As Esferas do Dragão são um dos símbolos da franquia."],
+    { Ação: 100, Aventura: 91, Comédia: 78, Drama: 86, Fantasia: 94 },
+    [
+      P("Goku", "Saiyajin", "Artes marciais", "b45309", "Protagonista da franquia, conhecido por seu amor por lutas e por sempre buscar superar seus próprios limites.", "Adulto", "175 cm"),
+      P("Vegeta", "Príncipe Saiyajin", "Saiyajin", "1e40af", "Príncipe dos Saiyajins e rival de Goku, sempre buscando ficar mais forte.", "Adulto", "164 cm"),
+      P("Gohan", "Guerreiro", "Meio-Saiyajin", "166534", "Filho de Goku que demonstra enorme potencial desde criança.", "Adolescente", "176 cm"),
+      P("Piccolo", "Guerreiro", "Namekuseijin", "14532d", "Guerreiro Namekuseijin que se torna um importante aliado dos heróis.", "Adulto", "226 cm"),
+      P("Bulma", "Cientista", "Capsule Corp", "0369a1", "Gênia inventora e amiga de Goku desde o início da jornada."),
+      P("Kuririn", "Guerreiro Z", "Kamehameha", "ea580c", "Melhor amigo de Goku e um dos humanos mais fortes do grupo."),
+      P("Trunks", "Guerreiro do futuro", "Espada", "6d28d9", "Filho de Vegeta e Bulma, viaja do futuro para alertar os heróis."),
+      P("Goten", "Meio-Saiyajin", "Fusão", "ea580c", "Filho caçula de Goku, muito parecido com o pai."),
+      P("Mestre Kame", "Mestre", "Kamehameha", "166534", "Mestre das artes marciais e criador do Kamehameha."),
+      P("Tenshinhan", "Guerreiro Z", "Três olhos", "14532d", "Lutador de três olhos, antigo rival e depois aliado de Goku."),
+      P("Freeza", "Imperador", "Forma final", "6d28d9", "Tirano do universo e um dos maiores inimigos de Goku."),
+      P("Cell", "Androide", "Bio-androide", "166534", "Bio-androide criado para absorver outros androides e se tornar perfeito."),
+      P("Majin Boo", "Vilão", "Magia", "be185d", "Criatura rosa de poder imenso, imprevisível e infantil."),
+      P("Mr. Satan", "Campeão", "Herói do mundo", "ca8a04", "Campeão mundial de artes marciais, tido como herói pelo público."),
+      P("Videl", "Lutadora", "Filha de Mr. Satan", "0369a1", "Lutadora corajosa que se torna parceira de Gohan.")
+    ]),
+
+  A("Demon Slayer", 9.3, "Popular", ["Ação", "Fantasia", "Terror", "Shounen"], "2019", "ufotable", "55+", "7f1d1d",
+    "Tanjiro Kamado entra para o Corpo de Caçadores de Demônios após uma tragédia atingir sua família.",
+    ["Tanjiro usa técnicas de respiração em seus combates.", "Nezuko é irmã de Tanjiro.", "A obra ficou conhecida pela animação produzida pelo estúdio ufotable.", "Os Hashira ocupam posições de grande destaque dentro do Corpo de Caçadores."],
+    { Ação: 98, Fantasia: 96, Terror: 83, Drama: 95, Comédia: 70 },
+    [
+      P("Tanjiro Kamado", "Protagonista", "Caçador", "7f1d1d", "Jovem caçador que busca uma forma de recuperar sua irmã e enfrentar os demônios.", "15 anos", "165 cm"),
+      P("Nezuko Kamado", "Irmã", "Demônio", "9f1239", "Irmã de Tanjiro que passa por uma transformação que muda sua vida.", "14 anos", "153 cm"),
+      P("Zenitsu Agatsuma", "Caçador", "Respiração do Trovão", "ca8a04", "Caçador extremamente medroso que revela habilidades impressionantes em determinadas situações.", "16 anos", "164 cm"),
+      P("Inosuke Hashibira", "Caçador", "Respiração da Besta", "365314", "Um caçador criado nas montanhas e conhecido por sua personalidade competitiva.", "15 anos", "164 cm"),
+      P("Kyojuro Rengoku", "Hashira", "Chama", "991b1b", "Hashira das Chamas, conhecido por sua energia, determinação e senso de dever.", "20 anos", "177 cm"),
+      P("Giyu Tomioka", "Hashira", "Água", "1e3a8a", "Hashira da Água, reservado e muito habilidoso com a espada."),
+      P("Shinobu Kocho", "Hashira", "Inseto", "7c3aed", "Hashira dos Insetos, especialista em venenos contra demônios."),
+      P("Mitsuri Kanroji", "Hashira", "Amor", "be185d", "Hashira do Amor, de força física impressionante e coração gentil."),
+      P("Tengen Uzui", "Hashira", "Som", "ca8a04", "Hashira do Som, ex-shinobi que luta de forma vistosa."),
+      P("Muichiro Tokito", "Hashira", "Névoa", "475569", "Hashira da Névoa, um prodígio muito jovem."),
+      P("Gyomei Himejima", "Hashira", "Pedra", "334155", "Hashira da Pedra, o mais forte fisicamente do Corpo."),
+      P("Sanemi Shinazugawa", "Hashira", "Vento", "166534", "Hashira do Vento, de temperamento explosivo."),
+      P("Obanai Iguro", "Hashira", "Serpente", "14532d", "Hashira da Serpente, cuidadoso e desconfiado."),
+      P("Muzan Kibutsuji", "Vilão", "Rei dos Demônios", "450a0a", "O primeiro demônio e principal inimigo do Corpo de Caçadores."),
+      P("Kanao Tsuyuri", "Caçadora", "Respiração da Flor", "9f1239", "Caçadora tímida e muito talentosa, protegida de Shinobu.")
+    ]),
+
+  A("Bleach", 9.1, "Clássico / Popular", ["Ação", "Fantasia", "Shounen"], "2004", "Pierrot", "366+", "4c1d95",
+    "Ichigo Kurosaki passa a enxergar espíritos e assume responsabilidades como Shinigami.",
+    ["Ichigo é o protagonista da obra.", "Zanpakutō são armas importantes dos Shinigami.", "A Soul Society é um dos principais mundos da história.", "Bleach faz parte do grupo conhecido como Big Three."],
+    { Ação: 97, Fantasia: 96, Drama: 89, Comédia: 76, Estratégia: 90 },
+    [
+      P("Ichigo Kurosaki", "Shinigami", "Substituto", "4c1d95", "Estudante que ganha poderes de Shinigami e passa a proteger humanos e espíritos.", "15 anos", "174 cm"),
+      P("Rukia Kuchiki", "Shinigami", "Gotei 13", "1e3a8a", "Shinigami responsável por introduzir Ichigo ao mundo espiritual.", "Adulto", "144 cm"),
+      P("Byakuya Kuchiki", "Capitão", "Senbonzakura", "475569", "Capitão de uma das divisões do Gotei 13 e membro do clã Kuchiki.", "Adulto", "180 cm"),
+      P("Orihime Inoue", "Aliada", "Shun Shun Rikka", "be185d", "Colega de Ichigo com poderes de cura e proteção."),
+      P("Yasutora Sado (Chad)", "Aliado", "Braço poderoso", "166534", "Colega de classe forte e leal, grande amigo de Ichigo."),
+      P("Uryu Ishida", "Quincy", "Arco espiritual", "1e3a8a", "Último Quincy da escola, atirador habilidoso e orgulhoso."),
+      P("Kisuke Urahara", "Ex-capitão", "Benihime", "ca8a04", "Dono de loja misterioso e ex-capitão do Gotei 13."),
+      P("Renji Abarai", "Tenente", "Zabimaru", "991b1b", "Tenente da 6ª Divisão e velho amigo de Rukia."),
+      P("Toshiro Hitsugaya", "Capitão", "Hyorinmaru", "0369a1", "Jovem prodígio e capitão da 10ª Divisão, mestre do gelo."),
+      P("Kenpachi Zaraki", "Capitão", "11ª Divisão", "7f1d1d", "Capitão fascinado por lutas fortes e de poder imenso."),
+      P("Sosuke Aizen", "Ex-capitão", "Kyoka Suigetsu", "475569", "Ex-capitão traidor e um dos grandes antagonistas da obra."),
+      P("Yoruichi Shihoin", "Aliada", "Flash Goddess", "7c3aed", "Ex-comandante da Força de Operações Secretas, muito veloz."),
+      P("Rangiku Matsumoto", "Tenente", "Haineko", "ea580c", "Tenente da 10ª Divisão, bem-humorada e poderosa."),
+      P("Gin Ichimaru", "Ex-capitão", "Shinso", "64748b", "Ex-capitão da 3ª Divisão, sempre sorrindo e cheio de segredos."),
+      P("Shunsui Kyoraku", "Capitão-comandante", "Katen Kyokotsu", "be185d", "Capitão relaxado, mas de enorme habilidade com a espada.")
+    ]),
+
+  A("Jujutsu Kaisen", 9.0, "Popular", ["Ação", "Fantasia", "Terror", "Shounen"], "2020", "MAPPA", "45+", "4c1d95",
+    "Yuji Itadori entra no mundo dos feiticeiros após se envolver com um objeto amaldiçoado extremamente perigoso.",
+    ["Yuji Itadori é o protagonista.", "Satoru Gojo é professor na Escola Jujutsu.", "As maldições são manifestações de energia negativa.", "O anime é produzido pelo estúdio MAPPA."],
+    { Ação: 98, Fantasia: 95, Terror: 90, Drama: 92, Comédia: 73 },
+    [
+      P("Yuji Itadori", "Feiticeiro", "Hospedeiro", "be123c", "Estudante que entra no mundo do jujutsu após um acontecimento envolvendo Sukuna.", "15 anos", "173 cm"),
+      P("Megumi Fushiguro", "Feiticeiro", "Técnica das Dez Sombras", "172554", "Feiticeiro que utiliza uma técnica baseada na invocação de shikigamis.", "15 anos", "175 cm"),
+      P("Nobara Kugisaki", "Feiticeira", "Martelo e pregos", "831843", "Feiticeira de personalidade forte que utiliza martelo, pregos e bonecos de palha em seus combates.", "16 anos", "160 cm"),
+      P("Satoru Gojo", "Professor", "Seis Olhos", "0369a1", "Um dos personagens mais poderosos da obra e professor dos estudantes de Jujutsu.", "28 anos", "190 cm"),
+      P("Ryomen Sukuna", "Maldição", "Rei das Maldições", "7f1d1d", "Poderosa maldição que habita o corpo de Yuji."),
+      P("Maki Zenin", "Feiticeira", "Mestra em armas", "166534", "Feiticeira habilidosa que luta com armas amaldiçoadas."),
+      P("Toge Inumaki", "Feiticeiro", "Fala amaldiçoada", "475569", "Feiticeiro cuja voz força os outros a obedecer."),
+      P("Panda", "Feiticeiro", "Corpo anômalo", "334155", "Um panda com consciência própria, criado como um cadáver amaldiçoado."),
+      P("Kento Nanami", "Feiticeiro", "Proporção 7:3", "ca8a04", "Feiticeiro de grau especial, sério e muito profissional."),
+      P("Suguru Geto", "Ex-feiticeiro", "Manipulação de maldições", "1e1b4b", "Ex-colega de Gojo que passa a seguir um caminho radical."),
+      P("Aoi Todo", "Feiticeiro", "Troca de posição", "9a3412", "Feiticeiro enérgico e muito forte, fã de ídolos."),
+      P("Yuta Okkotsu", "Feiticeiro", "Rika", "e5e7eb", "Feiticeiro de grau especial, ligado à maldição Rika."),
+      P("Mahito", "Maldição", "Transfiguração", "0369a1", "Maldição que manipula a forma da alma."),
+      P("Toji Fushiguro", "Assassino", "Restrição celestial", "1f2937", "Assassino sem energia amaldiçoada, mas de força física enorme."),
+      P("Jogo", "Maldição", "Fogo", "c2410c", "Maldição de fogo, muito agressiva e poderosa.")
+    ]),
+
+  A("Attack on Titan", 8.9, "Popular", ["Ação", "Terror", "Fantasia"], "2013", "WIT Studio / MAPPA", "89", "334155",
+    "A humanidade vive protegida por enormes muralhas enquanto tenta sobreviver à ameaça dos Titãs.",
+    ["Eren Yeager é um dos protagonistas.", "A história é conhecida por seus mistérios e reviravoltas.", "Os personagens fazem parte de diferentes organizações militares.", "A obra combina ação, drama e fantasia sombria."],
+    { Ação: 96, Fantasia: 92, Terror: 94, Drama: 100, Estratégia: 97 },
+    [
+      P("Eren Yeager", "Soldado", "Titã", "334155", "Personagem central da história, movido pelo desejo de liberdade.", "19 anos", "183 cm"),
+      P("Mikasa Ackerman", "Soldada", "Esquadrão", "7f1d1d", "Uma das combatentes mais habilidosas da história.", "19 anos", "170 cm"),
+      P("Levi Ackerman", "Capitão", "Tropa de Exploração", "0f172a", "Capitão conhecido por sua habilidade excepcional em combate.", "Adulto", "160 cm"),
+      P("Armin Arlert", "Estrategista", "Titã Colossal", "0369a1", "Amigo de Eren, inteligente e criativo em situações difíceis."),
+      P("Historia Reiss", "Rainha", "Realeza", "ca8a04", "Soldada gentil com um papel importante na história do reino."),
+      P("Jean Kirstein", "Soldado", "Tropa de Exploração", "92400e", "Soldado direto e leal que amadurece ao longo da jornada."),
+      P("Sasha Braus", "Soldada", "Arqueira", "9a3412", "Soldada animada, famosa pelo amor à comida."),
+      P("Connie Springer", "Soldado", "Tropa de Exploração", "475569", "Soldado de bom humor e grande coragem."),
+      P("Reiner Braun", "Guerreiro", "Titã Encouraçado", "166534", "Guerreiro com um papel central e doloroso na trama."),
+      P("Annie Leonhart", "Guerreira", "Titã Feminino", "7c3aed", "Soldada habilidosa e reservada, mestra em combate corpo a corpo."),
+      P("Bertholdt Hoover", "Guerreiro", "Titã Colossal", "1e3a8a", "Guerreiro tímido, dono de um enorme poder."),
+      P("Erwin Smith", "Comandante", "Tropa de Exploração", "1e3a8a", "Comandante estrategista que lidera a Tropa de Exploração."),
+      P("Hange Zoë", "Pesquisadora", "Esquadrão", "334155", "Pesquisadora fascinada pelos Titãs e muito inteligente."),
+      P("Zeke Yeager", "Guerreiro", "Titã Fera", "92400e", "Meio-irmão de Eren e líder dos guerreiros de Marley."),
+      P("Grisha Yeager", "Médico", "Pai de Eren", "475569", "Pai de Eren, envolvido nos grandes segredos do mundo.")
+    ]),
+
+  A("Hunter x Hunter", 8.8, "Clássico / Popular", ["Ação", "Aventura", "Fantasia"], "2011", "Madhouse", "148", "166534",
+    "Gon Freecss inicia uma jornada para se tornar Hunter e encontrar seu pai.",
+    ["Gon é conhecido por sua personalidade otimista.", "Killua pertence a uma família de assassinos.", "O sistema de Nen possui diferentes categorias.", "A amizade entre Gon e Killua é central na história."],
+    { Ação: 91, Aventura: 98, Fantasia: 94, Drama: 89, Estratégia: 99 },
+    [
+      P("Gon Freecss", "Hunter", "Nen", "166534", "Garoto determinado que quer se tornar Hunter e encontrar seu pai.", "14 anos", "154 cm"),
+      P("Killua Zoldyck", "Hunter", "Assassino", "164e63", "Membro de uma famosa família de assassinos e melhor amigo de Gon.", "14 anos", "158 cm"),
+      P("Kurapika", "Hunter", "Clã Kurta", "f59e0b", "Hunter que busca justiça relacionada ao seu clã.", "17 anos", "171 cm"),
+      P("Leorio Paradinight", "Hunter", "Futuro médico", "334155", "Quer ser médico e vira grande amigo de Gon, Killua e Kurapika."),
+      P("Hisoka Morow", "Mágico", "Bungee Gum", "be185d", "Hunter imprevisível que adora enfrentar oponentes fortes."),
+      P("Chrollo Lucilfer", "Líder", "Genei Ryodan", "1f2937", "Líder da Tropa Fantasma, grupo de ladrões lendário."),
+      P("Meruem", "Rei", "Formigas-Quimera", "ca8a04", "Rei das Formigas-Quimera, de inteligência e poder enormes."),
+      P("Isaac Netero", "Presidente", "Associação Hunter", "92400e", "Presidente da Associação Hunter, mestre de Nen."),
+      P("Ging Freecss", "Hunter", "Pai de Gon", "166534", "Hunter lendário e pai de Gon."),
+      P("Biscuit Krueger", "Mestra", "Treinadora de Nen", "be185d", "Hunter experiente que treina Gon e Killua."),
+      P("Illumi Zoldyck", "Assassino", "Irmão de Killua", "1e1b4b", "Irmão mais velho de Killua, frio e manipulador."),
+      P("Kite", "Hunter", "Ruínas", "475569", "Hunter habilidoso que serve de guia e mentor a Gon."),
+      P("Neferpitou", "Guarda Real", "Formigas-Quimera", "ca8a04", "Guarda leal de Meruem, de poder assustador."),
+      P("Komugi", "Jogadora de Gungi", "Mestra de Gungi", "92400e", "Jogadora cega de Gungi que cria um laço especial com Meruem."),
+      P("Alluka Zoldyck", "Irmã de Killua", "Nanika", "6d28d9", "Irmã caçula de Killua, ligada a um poder misterioso.")
+    ]),
+
+  A("My Hero Academia", 8.7, "Popular", ["Ação", "Comédia", "Shounen"], "2016", "Bones", "150+", "0369a1",
+    "Izuku Midoriya vive em um mundo onde pessoas com superpoderes são comuns e sonha em se tornar um herói.",
+    ["Izuku Midoriya é o protagonista.", "A U.A. é uma das principais escolas para futuros heróis.", "Os poderes são chamados de individualidades.", "All Might é uma figura central para Izuku."],
+    { Ação: 93, Aventura: 89, Comédia: 81, Drama: 91, Estratégia: 88 },
+    [
+      P("Izuku Midoriya", "Estudante", "One For All", "166534", "Jovem que sonha em se tornar um herói mesmo tendo nascido sem individualidade.", "16 anos", "166 cm"),
+      P("Katsuki Bakugo", "Estudante", "Explosão", "9f1239", "Estudante extremamente competitivo com uma individualidade explosiva.", "16 anos", "172 cm"),
+      P("Shoto Todoroki", "Estudante", "Gelo e fogo", "475569", "Estudante que possui uma individualidade capaz de manipular gelo e fogo.", "16 anos", "176 cm"),
+      P("Ochaco Uraraka", "Estudante", "Gravidade Zero", "be185d", "Estudante simpática e determinada que faz objetos flutuarem."),
+      P("Tenya Iida", "Estudante", "Motor", "1e3a8a", "Representante de classe, sério e muito rápido."),
+      P("All Might", "Herói", "Símbolo da Paz", "ca8a04", "O maior herói da sociedade e mentor de Izuku."),
+      P("Eijiro Kirishima", "Estudante", "Enrijecimento", "991b1b", "Estudante de bom coração que endurece o corpo."),
+      P("Tsuyu Asui", "Estudante", "Sapo", "166534", "Estudante calma, com habilidades de sapo."),
+      P("Momo Yaoyorozu", "Estudante", "Criação", "be123c", "Estudante inteligente que cria objetos a partir do próprio corpo."),
+      P("Denki Kaminari", "Estudante", "Eletricidade", "ca8a04", "Estudante brincalhão que gera eletricidade."),
+      P("Mina Ashido", "Estudante", "Ácido", "be185d", "Estudante alegre e animada que produz ácido."),
+      P("Shota Aizawa", "Professor", "Apagar", "334155", "Professor da classe 1-A que anula individualidades com o olhar."),
+      P("Endeavor", "Herói", "Hellflame", "c2410c", "Herói de fogo e pai de Todoroki."),
+      P("Hawks", "Herói", "Asas", "991b1b", "Herói veloz e muito habilidoso."),
+      P("Tomura Shigaraki", "Vilão", "Decaimento", "475569", "Líder da Liga dos Vilões e grande antagonista.")
+    ]),
+
+  A("Haikyuu!!", 8.6, "Esporte", ["Esporte", "Comédia"], "2014", "Production I.G", "85+", "ea580c",
+    "Hinata Shoyo entra no mundo do vôlei e busca superar suas limitações para se tornar um grande jogador.",
+    ["Hinata é conhecido por sua velocidade e impulsão.", "Kageyama é um levantador extremamente habilidoso.", "O Karasuno é o principal time da história.", "A obra popularizou ainda mais o vôlei entre fãs de anime."],
+    { Esporte: 100, Comédia: 87, Drama: 90, Ação: 82, Estratégia: 95 },
+    [
+      P("Shoyo Hinata", "Atacante", "Karasuno", "ea580c", "Jogador baixo para o esporte, mas extremamente rápido e habilidoso nos saltos.", "16 anos", "162 cm"),
+      P("Tobio Kageyama", "Levantador", "Karasuno", "1e3a8a", "Levantador talentoso conhecido por sua precisão e exigência dentro da quadra.", "16 anos", "180 cm"),
+      P("Kei Tsukishima", "Bloqueador", "Karasuno", "ca8a04", "Bloqueador alto e estratégico do time Karasuno.", "16 anos", "190 cm"),
+      P("Daichi Sawamura", "Capitão", "Karasuno", "334155", "Capitão do Karasuno, líder calmo e confiável."),
+      P("Koshi Sugawara", "Levantador", "Karasuno", "92400e", "Veterano gentil que apoia o time dentro e fora da quadra."),
+      P("Asahi Azumane", "Ás", "Karasuno", "7c2d12", "Ás do Karasuno, forte no ataque, mas um pouco inseguro."),
+      P("Yu Nishinoya", "Líbero", "Karasuno", "166534", "Líbero famoso pelas defesas espetaculares."),
+      P("Ryunosuke Tanaka", "Atacante", "Karasuno", "9a3412", "Atacante enérgico e barulhento."),
+      P("Tadashi Yamaguchi", "Reserva", "Karasuno", "14532d", "Amigo de infância de Tsukishima, destaque nos saques."),
+      P("Kiyoko Shimizu", "Gerente", "Karasuno", "64748b", "Gerente do time, admirada por todos."),
+      P("Tetsuro Kuroo", "Capitão", "Nekoma", "991b1b", "Capitão do Nekoma, bloqueador astuto."),
+      P("Kenma Kozume", "Levantador", "Nekoma", "b45309", "Levantador estratégico e amigo de infância de Kuroo."),
+      P("Wakatoshi Ushijima", "Ás", "Shiratorizawa", "6d28d9", "Um dos melhores atacantes do país."),
+      P("Tooru Oikawa", "Levantador", "Seijoh", "0369a1", "Levantador talentoso e grande rival de Kageyama."),
+      P("Kotaro Bokuto", "Ás", "Fukurodani", "475569", "Ás empolgado e imprevisível.")
+    ]),
+
+  A("Sailor Moon", 8.5, "Clássico", ["Romance", "Fantasia", "Comédia"], "1992", "Toei Animation", "200+", "be185d",
+    "Usagi Tsukino descobre que é uma guerreira destinada a proteger a Terra e seus amigos.",
+    ["Usagi é a protagonista da série.", "As Sailor Guardians possuem poderes ligados a diferentes astros.", "A obra combina magia, romance, ação e comédia.", "Sailor Moon é uma das franquias mais conhecidas do gênero magical girl."],
+    { Romance: 94, Fantasia: 99, Comédia: 86, Drama: 88, Ação: 80 },
+    [
+      P("Usagi Tsukino", "Sailor Moon", "Lua", "be185d", "A protagonista que descobre seu destino como Sailor Moon.", "14 anos", "152 cm"),
+      P("Ami Mizuno", "Sailor Mercury", "Mercúrio", "0369a1", "Guerreira inteligente e estratégica associada ao planeta Mercúrio.", "14 anos", "158 cm"),
+      P("Rei Hino", "Sailor Mars", "Marte", "991b1b", "Guerreira associada a Marte e conhecida por suas habilidades espirituais.", "14 anos", "164 cm"),
+      P("Makoto Kino", "Sailor Jupiter", "Júpiter", "166534", "Guerreira forte e carinhosa, ligada ao trovão."),
+      P("Minako Aino", "Sailor Venus", "Vênus", "ca8a04", "Líder das guerreiras, ligada ao amor."),
+      P("Mamoru Chiba", "Tuxedo Mask", "Terra", "1f2937", "Misterioso herói e grande amor de Usagi."),
+      P("Luna", "Conselheira", "Gata falante", "334155", "Gata falante que guia Usagi em sua missão."),
+      P("Artemis", "Conselheiro", "Gato falante", "e5e7eb", "Gato falante e parceiro de Minako."),
+      P("Chibiusa", "Pequena Dama", "Futuro", "f472b6", "Garota que vem do futuro e se liga a Usagi."),
+      P("Haruka Tenoh", "Sailor Uranus", "Urano", "ca8a04", "Guerreira independente associada ao vento."),
+      P("Michiru Kaioh", "Sailor Neptune", "Netuno", "0891b2", "Violinista elegante, guerreira dos mares."),
+      P("Setsuna Meioh", "Sailor Pluto", "Plutão", "6d28d9", "Guardiã do tempo e das portas."),
+      P("Hotaru Tomoe", "Sailor Saturn", "Saturno", "4c1d95", "Garota com um poder imenso e perigoso."),
+      P("Rainha Beryl", "Vilã", "Reino das Trevas", "991b1b", "Rainha das trevas e inimiga das Sailor Guardians."),
+      P("Galaxia", "Vilã", "Sailor Stars", "ca8a04", "Poderosa guerreira e grande antagonista de Sailor Stars.")
+    ]),
+
+  A("Solo Leveling", 8.4, "Popular", ["Ação", "Fantasia"], "2024", "A-1 Pictures", "25+", "312e81",
+    "Sung Jin-Woo começa como um dos caçadores mais fracos e recebe uma habilidade que permite evoluir de maneira diferente.",
+    ["Sung Jin-Woo é o protagonista.", "A obra surgiu originalmente como uma web novel.", "Os caçadores enfrentam monstros em dungeons.", "O sistema de evolução é um dos elementos centrais da história."],
+    { Ação: 99, Fantasia: 98, Drama: 84, Estratégia: 86, Aventura: 94 },
+    [
+      P("Sung Jin-Woo", "Caçador", "Sistema", "312e81", "Caçador que recebe um sistema misterioso capaz de permitir sua evolução contínua.", "Adulto jovem", "183 cm"),
+      P("Cha Hae-In", "Caçadora", "Guilda", "4c1d95", "Uma das caçadoras mais habilidosas da história.", "Adulto jovem", "168 cm"),
+      P("Go Gun-Hee", "Presidente", "Associação", "334155", "Presidente da Associação de Caçadores da Coreia."),
+      P("Thomas Andre", "Caçador", "Rank Nacional", "92400e", "Caçador americano de poder imenso."),
+      P("Baek Yoon-Ho", "Caçador", "Guilda Tigre Branco", "e5e7eb", "Líder da Guilda Tigre Branco, forte e direto."),
+      P("Choi Jong-In", "Caçador", "Guilda Hunters", "991b1b", "Líder da guilda Hunters, caçador de rank S."),
+      P("Yoo Jin-Ho", "Caçador", "Amigo de Jin-Woo", "166534", "Amigo leal de Jin-Woo desde o começo."),
+      P("Sung Jin-Ah", "Irmã", "Família", "be185d", "Irmã de Jin-Woo, a quem ele quer proteger."),
+      P("Igris", "Sombra", "Cavaleiro", "1e3a8a", "Cavaleiro sombrio, um dos soldados mais fiéis de Jin-Woo."),
+      P("Beru", "Sombra", "Rei das Formigas", "14532d", "Antigo Rei das Formigas que passa a servir Jin-Woo."),
+      P("Antares", "Vilão", "Rei dos Dragões", "450a0a", "Rei dos Dragões e um dos maiores inimigos da história."),
+      P("Esil Radiru", "Caçadora", "Elfa", "7c3aed", "Elfa de grande poder que cruza o caminho de Jin-Woo."),
+      P("Hwang Dong-Suk", "Caçador", "Rival", "475569", "Caçador que conhece Jin-Woo desde cedo e o provoca."),
+      P("Kim Chul", "Caçador", "Rank B", "64748b", "Caçador que faz parte do grupo do início da história.")
+    ]),
+
+  A("Pokémon", 9.2, "Clássico / Popular", ["Pokémon", "Aventura", "Ação", "Comédia", "Fantasia"], "1997", "OLM", "1200+", "1d4ed8",
+    "Acompanhe Ash Ketchum e seus parceiros Pokémon em jornadas por diferentes regiões, conhecendo novas criaturas, fazendo amizades e participando de batalhas e competições.",
+    ["Pikachu é um dos mascotes mais reconhecidos da franquia.", "A série animada estreou no Japão em 1997.", "Existem muitas regiões diferentes para explorar no mundo Pokémon.", "Treinadores criam laços com seus Pokémon durante as jornadas."],
+    { Aventura: 98, Ação: 85, Comédia: 88, Fantasia: 96, Amizade: 100 },
+    [
+      P("Ash Ketchum", "Treinador Pokémon", "Sonho de ser Mestre Pokémon", "1d4ed8", "Treinador determinado que viaja por diferentes regiões ao lado de seus Pokémon e amigos.", "10 anos"),
+      P("Pikachu", "Pokémon elétrico", "Tipo Elétrico", "ca8a04", "Parceiro inseparável de Ash, conhecido por sua personalidade corajosa e seus ataques elétricos.", "Não se aplica", "40 cm"),
+      P("Misty", "Treinadora Pokémon", "Especialista em Pokémon aquáticos", "0891b2", "Treinadora que acompanha Ash em parte de sua jornada e tem grande afinidade com Pokémon aquáticos.", "10 anos"),
+      P("Brock", "Treinador Pokémon", "Especialista em Pokémon de Pedra", "92400e", "Treinador experiente e cuidadoso, que também ajuda o grupo com seus conhecimentos de Pokémon.", "15 anos"),
+      P("Charizard", "Pokémon", "Tipo Fogo/Voador", "c2410c", "Pokémon poderoso da linha evolutiva de Charmander, conhecido por suas habilidades de fogo e voo.", "Não se aplica", "1,7 m"),
+      P("Gary Oak", "Rival", "Neto do Prof. Oak", "334155", "Rival de Ash desde o início, treinador talentoso e confiante."),
+      P("Professor Oak", "Pesquisador", "Especialista", "92400e", "Famoso pesquisador de Pokémon que dá os primeiros parceiros aos treinadores."),
+      P("Jessie", "Equipe Rocket", "Vilã atrapalhada", "be185d", "Integrante da Equipe Rocket, sempre atrás do Pikachu de Ash."),
+      P("James", "Equipe Rocket", "Vilão atrapalhado", "7c3aed", "Parceiro de Jessie na Equipe Rocket, de bom coração apesar de tudo."),
+      P("Meowth", "Equipe Rocket", "Pokémon que fala", "ca8a04", "Pokémon falante da Equipe Rocket, esperto e ambicioso."),
+      P("May", "Coordenadora", "Concursos Pokémon", "be123c", "Coordenadora que viaja com Ash por Hoenn."),
+      P("Dawn", "Coordenadora", "Concursos Pokémon", "1d4ed8", "Coordenadora de Sinnoh, determinada e cheia de estilo."),
+      P("Mewtwo", "Pokémon", "Tipo Psíquico", "6d28d9", "Pokémon lendário criado em laboratório, de poder psíquico enorme."),
+      P("Gengar", "Pokémon", "Tipo Fantasma/Veneno", "4c1d95", "Pokémon brincalhão e travesso que adora assustar."),
+      P("Snorlax", "Pokémon", "Tipo Normal", "0891b2", "Pokémon gigante e sonolento, famoso por dormir e comer muito.")
+    ]),
+
+  A("Sakura Card Captor", 8.7, "Clássico", ["Aventura", "Fantasia", "Romance", "Comédia"], "1998", "Madhouse", "70", "be185d",
+    "Sakura Kinomoto encontra um misterioso livro de cartas mágicas e acaba libertando as Cartas Clow. Com a ajuda de Kero e de seus amigos, ela precisa capturá-las novamente e aprender a controlar seus poderes.",
+    ["Sakura é escolhida para reunir as Cartas Clow que foram espalhadas.", "Kero é o guardião das cartas mágicas.", "A série mistura magia, aventura, amizade e momentos de comédia.", "O anime original estreou no Japão em 1998."],
+    { Aventura: 90, Fantasia: 98, Romance: 85, Comédia: 82, Amizade: 96 },
+    [
+      P("Sakura Kinomoto", "Card Captor", "Cartas Clow", "be185d", "Uma garota alegre que recebe a missão de recuperar as Cartas Clow e desenvolver suas habilidades mágicas.", "10 anos"),
+      P("Kerberos (Kero)", "Guardião", "Guardião das cartas", "ca8a04", "O guardião das Cartas Clow, que orienta Sakura durante sua jornada.", "Milenar", "Variável"),
+      P("Tomoyo Daidouji", "Melhor amiga", "Figurinos de Sakura", "7c3aed", "Melhor amiga de Sakura, conhecida por sua criatividade e por preparar os figurinos usados nas missões.", "10 anos"),
+      P("Syaoran Li", "Card Captor", "Clã Li", "1d4ed8", "Um jovem habilidoso que chega para procurar as Cartas Clow e passa a ajudar Sakura.", "10 anos"),
+      P("Yukito Tsukishiro", "Amigo", "Ligação com Yue", "64748b", "Amigo de Toya e uma pessoa muito querida por Sakura, com uma ligação especial com o mundo mágico.", "Adolescente"),
+      P("Toya Kinomoto", "Irmão de Sakura", "Protetor", "334155", "Irmão mais velho de Sakura, protetor e muito atento ao mundo espiritual."),
+      P("Fujitaka Kinomoto", "Pai", "Arqueólogo", "92400e", "Pai de Sakura, arqueólogo gentil e muito querido."),
+      P("Yue", "Guardião", "Guardião da Lua", "e5e7eb", "Guardião das Cartas Clow, calmo e muito poderoso."),
+      P("Meiling Rae", "Prima de Syaoran", "Artes marciais", "991b1b", "Prima de Syaoran que chega do exterior e se destaca nas artes marciais."),
+      P("Eriol Hiiragizawa", "Misterioso", "Reencarnação de Clow", "1e3a8a", "Garoto misterioso ligado ao criador das Cartas Clow."),
+      P("Naoko Yanagisawa", "Amiga", "Colega de Sakura", "7c3aed", "Amiga de Sakura que adora histórias de mistério."),
+      P("Rika Sasaki", "Amiga", "Colega de Sakura", "f472b6", "Amiga de Sakura, calma e madura."),
+      P("Chiharu Mihara", "Amiga", "Colega de Sakura", "166534", "Amiga de Sakura, enérgica e divertida."),
+      P("Takashi Yamazaki", "Amigo", "Contador de histórias", "0369a1", "Colega de Sakura, famoso por inventar histórias fantasiosas."),
+      P("Kaho Mizuki", "Professora", "Sacerdotisa", "7c3aed", "Professora gentil que também conhece o mundo mágico.")
+    ]),
+
+  /* =======================================================
+     NOVOS ANIMES
+     ======================================================= */
+
+  A("Dragon Ball", 8.6, "Clássico", ["Aventura", "Ação", "Comédia", "Fantasia", "Shounen"], "1986", "Toei Animation", "153", "ea580c",
+    "O jovem Goku, com cauda de macaco e força incomum, conhece Bulma e parte em busca das sete Esferas do Dragão.",
+    ["Baseado no mangá de Akira Toriyama.", "Goku começa a série ainda criança, com cauda de macaco.", "Reunidas, as Esferas do Dragão realizam um desejo.", "O anime original foi exibido de 1986 a 1989."],
+    { Aventura: 98, Ação: 90, Comédia: 92, Fantasia: 94, Amizade: 96 },
+    [
+      P("Goku", "Protagonista", "Cauda de macaco", "ea580c", "Garoto de enorme força que parte em uma grande aventura."),
+      P("Bulma", "Cientista", "Radar do Dragão", "0369a1", "Garota inteligente que busca as Esferas do Dragão."),
+      P("Kuririn", "Aprendiz", "Templo Orin", "ca8a04", "Melhor amigo de Goku e rival nos treinos."),
+      P("Mestre Kame", "Mestre", "Kamehameha", "166534", "Mestre das artes marciais e criador do Kamehameha."),
+      P("Yamcha", "Bandido do deserto", "Soco do Lobo", "1e3a8a", "Ex-bandido que se torna aliado e amigo do grupo."),
+      P("Oolong", "Porquinho", "Transformações", "be185d", "Porquinho que se transforma em vários objetos e pessoas."),
+      P("Puar", "Gatinho", "Transformações", "7c3aed", "Gatinho companheiro de Yamcha com poder de transformação."),
+      P("Chi-Chi", "Princesa", "Artes marciais", "be123c", "Filha do Rei Boi, forte e determinada."),
+      P("Tenshinhan", "Lutador", "Escola da Garça", "14532d", "Lutador de três olhos que enfrenta Goku no Torneio."),
+      P("Rei Piccolo", "Vilão", "Demônio", "6d28d9", "Demônio que quer dominar o mundo.")
+    ]),
+
+  A("Dragon Ball GT", 7.2, "Clássico", ["Aventura", "Ação", "Fantasia", "Shounen"], "1996", "Toei Animation", "64", "b45309",
+    "Goku vira criança de novo por causa de um desejo e parte pelo espaço com Trunks e Pan atrás das Esferas Negras.",
+    ["É uma história original, sem mangá de Toriyama.", "Goku vira criança após um desejo feito às Esferas Negras.", "Apresenta o Super Saiyajin 4.", "Estreou em 1996."],
+    { Aventura: 92, Ação: 88, Fantasia: 90, Comédia: 70, Drama: 78 },
+    [
+      P("Goku", "Protagonista", "Super Saiyajin 4", "b45309", "Saiyajin que vira criança e parte em uma nova jornada."),
+      P("Pan", "Neta de Goku", "Aprendiz", "0369a1", "Neta de Goku, corajosa e determinada."),
+      P("Trunks", "Guerreiro", "Espada", "6d28d9", "Filho de Vegeta e Bulma que acompanha a viagem."),
+      P("Giru", "Robô", "Companheiro", "64748b", "Robô amigo que acompanha o grupo."),
+      P("Vegeta", "Príncipe Saiyajin", "Super Saiyajin 4", "1e40af", "Rival e aliado de Goku, sempre buscando evoluir."),
+      P("Bulma", "Cientista", "Capsule Corp", "0369a1", "Gênia que constrói a nave da jornada."),
+      P("Baby", "Vilão", "Parasita Tsufuru-jin", "6d28d9", "Ser parasita que controla corpos e quer vingança."),
+      P("Super C-17", "Androide", "Inferno", "334155", "Androide poderoso do Inferno."),
+      P("Omega Shenlong", "Vilão", "Dragão das Esferas Negras", "450a0a", "Dragão maligno das Esferas Negras."),
+      P("Pilaf", "Vilão", "Desejo", "166534", "Antigo inimigo de Goku, cheio de planos desastrados.")
+    ]),
+
+  A("Dragon Ball Z Kai", 9.0, "Clássico", ["Ação", "Aventura", "Fantasia", "Shounen"], "2009", "Toei Animation", "167", "c2410c",
+    "Versão remasterizada e condensada de Dragon Ball Z, mais fiel ao mangá de Akira Toriyama.",
+    ["Reedição de Dragon Ball Z com imagem refeita.", "Corta boa parte dos episódios de enrolação.", "Estreou em 2009 para celebrar os 20 anos de DBZ.", "Segue o ritmo do mangá."],
+    { Ação: 100, Aventura: 92, Fantasia: 94, Drama: 86, Comédia: 70 },
+    [
+      P("Goku", "Saiyajin", "Super Saiyajin", "c2410c", "Protagonista que supera os próprios limites a cada batalha."),
+      P("Vegeta", "Príncipe Saiyajin", "Orgulho Saiyajin", "1e40af", "Príncipe rival de Goku."),
+      P("Gohan", "Guerreiro", "Meio-Saiyajin", "166534", "Filho de Goku, de poder escondido."),
+      P("Piccolo", "Guerreiro", "Namekuseijin", "14532d", "Aliado dos heróis e mestre de Gohan."),
+      P("Kuririn", "Guerreiro Z", "Disco Solar", "ea580c", "Amigo de Goku e um dos mais corajosos do grupo."),
+      P("Bulma", "Cientista", "Capsule Corp", "0369a1", "Gênia inventora do grupo."),
+      P("Trunks", "Guerreiro do futuro", "Espada", "6d28d9", "Viajante do tempo que alerta os heróis."),
+      P("Freeza", "Imperador", "Forma final", "6d28d9", "Tirano do universo e grande vilão."),
+      P("Cell", "Androide", "Bio-androide", "166534", "Vilão perfeito criado a partir de vários guerreiros."),
+      P("Majin Boo", "Vilão", "Magia", "be185d", "Criatura rosa de poder gigantesco."),
+      P("Mestre Kame", "Mestre", "Kamehameha", "166534", "Mestre das artes marciais."),
+      P("Tenshinhan", "Guerreiro Z", "Kikoho", "14532d", "Lutador de três olhos e aliado dos heróis.")
+    ]),
+
+  A("Dragon Ball Super", 8.4, "Popular", ["Ação", "Aventura", "Comédia", "Fantasia", "Shounen"], "2015", "Toei Animation", "131", "7c2d12",
+    "Depois da saga do Majin Boo, Goku e seus amigos enfrentam deuses da destruição e participam do Torneio do Poder.",
+    ["Passa-se após a saga do Majin Boo.", "Apresenta os Deuses da Destruição.", "Traz o Torneio do Poder entre universos.", "Estreou em 2015."],
+    { Ação: 98, Aventura: 92, Fantasia: 94, Comédia: 80, Drama: 82 },
+    [
+      P("Goku", "Protagonista", "Instinto Superior", "ea580c", "Saiyajin que busca superar deuses e guerreiros de outros universos."),
+      P("Vegeta", "Príncipe Saiyajin", "Super Saiyajin Blue", "1e40af", "Rival de Goku, em busca de mais poder."),
+      P("Gohan", "Guerreiro", "Potencial Liberado", "166534", "Filho de Goku, de enorme potencial."),
+      P("Piccolo", "Guerreiro", "Namekuseijin", "14532d", "Aliado fiel e mentor de Gohan."),
+      P("Beerus", "Deus da Destruição", "Universo 7", "6d28d9", "Deus da Destruição do Universo 7, caprichoso e poderoso."),
+      P("Whis", "Anjo", "Mestre de Beerus", "0891b2", "Anjo que acompanha Beerus e treina Goku e Vegeta."),
+      P("Freeza", "Imperador", "Forma Dourada", "ca8a04", "Retorna mais forte depois de muito treino."),
+      P("Jiren", "Guerreiro", "Universo 11", "991b1b", "Guerreiro poderoso e disciplinado do Universo 11."),
+      P("Zeno", "Rei de Tudo", "Soberano", "e5e7eb", "Ser supremo e imprevisível que governa todos os universos."),
+      P("Hit", "Assassino", "Salto no tempo", "334155", "Assassino calmo e habilidoso do Universo 6."),
+      P("Trunks", "Guerreiro do futuro", "Espada", "6d28d9", "Viajante do tempo e aliado dos heróis."),
+      P("Bulma", "Cientista", "Capsule Corp", "0369a1", "Gênia inventora e esposa de Vegeta.")
+    ]),
+
+  A("Naruto Shippuden", 9.3, "Clássico / Popular", ["Ação", "Aventura", "Shounen"], "2007", "Pierrot", "500", "172554",
+    "Naruto retorna à vila depois de anos de treino e enfrenta a Akatsuki enquanto tenta trazer Sasuke de volta.",
+    ["Começa dois anos e meio depois do anime original.", "Naruto treina com Jiraiya.", "A Akatsuki é a principal ameaça.", "Foi exibido de 2007 a 2017."],
+    { Ação: 98, Aventura: 94, Drama: 96, Comédia: 72, Estratégia: 92 },
+    [
+      P("Naruto Uzumaki", "Protagonista", "Modo Sábio", "172554", "Ninja que busca proteger a vila e seus amigos."),
+      P("Sasuke Uchiha", "Rival", "Rinnegan", "312e81", "Ninja do clã Uchiha em busca de vingança e respostas."),
+      P("Sakura Haruno", "Kunoichi", "Força monstruosa", "be185d", "Ninja médica de força impressionante."),
+      P("Kakashi Hatake", "Sensei", "Sharingan", "334155", "Professor e ninja experiente da Equipe 7."),
+      P("Itachi Uchiha", "Shinobi", "Akatsuki", "3f0f46", "Irmão de Sasuke, figura central na trama do clã."),
+      P("Jiraiya", "Sannin", "Modo Sábio", "166534", "Mestre de Naruto e escritor."),
+      P("Gaara", "Kazekage", "Areia", "9a3412", "Líder da Vila da Areia e aliado de Naruto."),
+      P("Madara Uchiha", "Vilão", "Rinnegan", "1f2937", "Lendário líder do clã Uchiha e grande antagonista."),
+      P("Pain (Nagato)", "Líder da Akatsuki", "Rinnegan", "c2410c", "Líder da Akatsuki que ataca Konoha."),
+      P("Obito Uchiha", "Antagonista", "Kamui", "334155", "Ninja ligado a Kakashi e figura-chave da guerra."),
+      P("Hinata Hyuga", "Kunoichi", "Byakugan", "7c3aed", "Ninja do clã Hyuga e grande apoio de Naruto."),
+      P("Shikamaru Nara", "Estrategista", "Sombras", "334155", "Gênio estrategista de Konoha."),
+      P("Minato Namikaze", "Quarto Hokage", "Flash Amarelo", "ca8a04", "Pai de Naruto e herói de Konoha."),
+      P("Konan", "Akatsuki", "Origami", "1e3a8a", "Integrante da Akatsuki e amiga de Nagato.")
+    ]),
+
+  A("Boruto: Naruto Next Generations", 7.1, "Popular", ["Ação", "Aventura", "Shounen"], "2017", "Pierrot", "293", "0369a1",
+    "Boruto, filho de Naruto, vive em uma Konoha pacífica, mas novas ameaças fazem a nova geração entrar em ação.",
+    ["Continuação com a geração dos filhos dos heróis de Naruto.", "Boruto é filho de Naruto e Hinata.", "Naruto já é o Hokage.", "Estreou em 2017."],
+    { Ação: 88, Aventura: 85, Drama: 78, Comédia: 74, Estratégia: 80 },
+    [
+      P("Boruto Uzumaki", "Protagonista", "Equipe 7", "0369a1", "Filho de Naruto que quer trilhar o próprio caminho."),
+      P("Sarada Uchiha", "Kunoichi", "Sharingan", "be185d", "Filha de Sasuke e Sakura, sonha ser Hokage."),
+      P("Mitsuki", "Ninja", "Modo Sábio", "e5e7eb", "Ninja misterioso e curioso com o mundo."),
+      P("Kawaki", "Ninja", "Karma", "334155", "Jovem ligado a grandes mistérios da história."),
+      P("Naruto Uzumaki", "Hokage", "Sétimo Hokage", "172554", "Pai de Boruto e líder da vila."),
+      P("Sasuke Uchiha", "Ninja", "Rinnegan", "312e81", "Pai de Sarada e protetor da vila."),
+      P("Shikadai Nara", "Ninja", "Sombras", "334155", "Filho de Shikamaru, estrategista e preguiçoso."),
+      P("Inojin Yamanaka", "Ninja", "Arte Ninja", "ca8a04", "Filho de Ino, ninja ligado às artes."),
+      P("Chocho Akimichi", "Ninja", "Expansão", "ea580c", "Filha de Choji, forte e animada."),
+      P("Himawari Uzumaki", "Filha de Naruto", "Byakugan", "7c3aed", "Irmã caçula de Boruto, doce e poderosa."),
+      P("Hinata Hyuga", "Mãe", "Byakugan", "7c3aed", "Mãe de Boruto e Himawari, forte e carinhosa."),
+      P("Konohamaru Sarutobi", "Sensei", "Sarutobi", "991b1b", "Professor de Boruto e antigo amigo de Naruto.")
+    ]),
+
+  A("Pokémon Jornadas", 8.0, "Popular", ["Pokémon", "Aventura", "Ação", "Comédia", "Fantasia"], "2019", "OLM", "136+", "0891b2",
+    "Ash e Goh viajam por várias regiões, enfrentando treinadores fortes e vivendo novas aventuras Pokémon.",
+    ["Ash viaja pelo mundo inteiro.", "Goh sonha capturar o lendário Mew.", "A série acompanha a conquista de Ash como Campeão Mundial.", "Estreou em 2019."],
+    { Aventura: 96, Ação: 88, Comédia: 82, Fantasia: 90, Amizade: 98 },
+    [
+      P("Ash Ketchum", "Treinador", "Campeão Mundial", "1d4ed8", "Treinador que nunca desiste de seu sonho."),
+      P("Goh", "Treinador", "Caçador de Mew", "0891b2", "Novo amigo de Ash que sonha capturar Mew."),
+      P("Chloe", "Pesquisadora", "Assistente do Prof. Cerise", "be185d", "Amiga dos protagonistas e ligada às pesquisas."),
+      P("Pikachu", "Pokémon elétrico", "Tipo Elétrico", "ca8a04", "Parceiro inseparável de Ash."),
+      P("Leon", "Campeão", "Região de Galar", "7c3aed", "Campeão de Galar, treinador de nível lendário."),
+      P("Professor Cerise", "Pesquisador", "Instituto de Pesquisas", "334155", "Pesquisador que acompanha a jornada dos treinadores."),
+      P("Cinderace", "Pokémon", "Tipo Fogo", "c2410c", "Pokémon ágil que evolui de Scorbunny."),
+      P("Dracovish", "Pokémon", "Tipo Água/Dragão", "0891b2", "Pokémon fóssil de grande poder."),
+      P("Charizard", "Pokémon", "Tipo Fogo/Voador", "c2410c", "Pokémon poderoso, parceiro de longa data de Ash."),
+      P("Dragonite", "Pokémon", "Tipo Dragão/Voador", "ea580c", "Pokémon de coração gentil e força imensa.")
+    ]),
+
+  A("Pokémon Horizons", 8.2, "Popular", ["Pokémon", "Aventura", "Ação", "Fantasia"], "2023", "OLM", "Em exibição", "1e40af",
+    "Liko e Roy seguem em uma nova aventura Pokémon, ao lado de seus parceiros, em busca de mistérios e de um tesouro lendário.",
+    ["Estreou em 2023, depois do fim da jornada de Ash.", "Liko e Roy são os novos protagonistas.", "O Capitão Pikachu é um parceiro misterioso e aventureiro.", "A série mostra uma nova forma de viajar pelo mundo Pokémon."],
+    { Aventura: 96, Ação: 85, Comédia: 78, Fantasia: 92, Amizade: 95 },
+    [
+      P("Liko", "Protagonista", "Pingente misterioso", "1e40af", "Garota curiosa que parte em uma grande aventura."),
+      P("Roy", "Protagonista", "Treinador", "c2410c", "Garoto animado que sonha em ser um grande treinador."),
+      P("Friede", "Capitão", "Brave Olivine", "334155", "Capitão do navio Brave Olivine, ligado aos mistérios da viagem."),
+      P("Capitão Pikachu", "Pokémon", "Tipo Elétrico", "ca8a04", "Pikachu aventureiro com chapéu de capitão."),
+      P("Sprigatito", "Pokémon", "Tipo Planta", "166534", "Gatinho de grama, parceiro de Liko."),
+      P("Fuecoco", "Pokémon", "Tipo Fogo", "c2410c", "Crocodilo de fogo, parceiro de Roy."),
+      P("Dot", "Pesquisadora", "Brave Olivine", "7c3aed", "Integrante da tripulação, muito esperta."),
+      P("Amethio", "Explorador", "Exploradores", "334155", "Membro dos Exploradores, rival da turma.")
+    ]),
+
+  A("Death Note", 9.0, "Popular", ["Mistério", "Terror", "Fantasia"], "2006", "Madhouse", "37", "1f2937",
+    "O estudante Light Yagami encontra um caderno capaz de matar quem tiver o nome escrito nele e passa a se considerar justiceiro, até ser caçado pelo gênio L.",
+    ["Baseado no mangá de Tsugumi Ohba e Takeshi Obata.", "Ryuk é um Shinigami que deixa o caderno cair no mundo humano.", "Light e L travam um duelo de inteligência.", "O anime tem 37 episódios."],
+    { Mistério: 99, Terror: 85, Drama: 92, Estratégia: 100, Ação: 60 },
+    [
+      P("Light Yagami", "Protagonista", "Kira", "7f1d1d", "Estudante brilhante que usa o Death Note."),
+      P("L", "Detetive", "Gênio", "e5e7eb", "Detetive genial que caça Kira."),
+      P("Ryuk", "Shinigami", "Maçãs", "1f2937", "Shinigami entediado que solta o caderno no mundo humano."),
+      P("Misa Amane", "Modelo", "Segundo Kira", "be185d", "Modelo fã de Kira que acaba se envolvendo."),
+      P("Near", "Detetive", "Sucessor de L", "e5e7eb", "Jovem gênio que sucede L."),
+      P("Mello", "Detetive", "Sucessor de L", "334155", "Jovem impulsivo e brilhante que também sucede L."),
+      P("Soichiro Yagami", "Policial", "Chefe da polícia", "334155", "Pai de Light e policial íntegro."),
+      P("Rem", "Shinigami", "Protetora de Misa", "1e293b", "Shinigami que protege Misa."),
+      P("Watari", "Assistente", "Ajudante de L", "64748b", "Assistente leal e confiável de L."),
+      P("Teru Mikami", "Fiel de Kira", "Seguidor", "475569", "Seguidor fiel que usa o Death Note."),
+      P("Touta Matsuda", "Policial", "Equipe policial", "92400e", "Policial atrapalhado, mas de bom coração."),
+      P("Sayu Yagami", "Irmã", "Família Yagami", "be185d", "Irmã de Light, uma jovem comum.")
+    ]),
+
+  A("Fullmetal Alchemist: Brotherhood", 9.5, "Clássico / Popular", ["Ação", "Aventura", "Fantasia"], "2009", "Bones", "64", "7c2d12",
+    "Os irmãos Edward e Alphonse Elric tentam recuperar seus corpos depois de uma tentativa proibida de trazer a mãe de volta à vida.",
+    ["Baseado no mangá de Hiromu Arakawa.", "A alquimia segue a lei da troca equivalente.", "É conhecido por seguir de perto o mangá.", "Foi produzido pelo estúdio Bones."],
+    { Ação: 94, Aventura: 96, Fantasia: 95, Drama: 98, Estratégia: 92 },
+    [
+      P("Edward Elric", "Alquimista", "Alquimista de Aço", "7c2d12", "Jovem alquimista que busca recuperar o próprio corpo."),
+      P("Alphonse Elric", "Alquimista", "Armadura", "475569", "Irmão de Edward preso em uma armadura."),
+      P("Roy Mustang", "Coronel", "Alquimia do fogo", "1e3a8a", "Coronel ambicioso que usa alquimia de fogo."),
+      P("Riza Hawkeye", "Tenente", "Atiradora", "ca8a04", "Atiradora precisa e braço direito de Mustang."),
+      P("Winry Rockbell", "Mecânica", "Automail", "ca8a04", "Amiga de infância dos Elric e mecânica talentosa."),
+      P("Scar", "Guerreiro", "Alquimia reversa", "7f1d1d", "Guerreiro ishvalano que busca vingança."),
+      P("Maes Hughes", "Tenente-coronel", "Pai coruja", "166534", "Militar gentil e muito apegado à família."),
+      P("Alex Louis Armstrong", "Major", "Alquimista de Força", "92400e", "Major forte, dramático e de bom coração."),
+      P("Izumi Curtis", "Mestra", "Alquimista", "9f1239", "Mestra de Edward e Alphonse."),
+      P("Van Hohenheim", "Alquimista", "Pai dos Elric", "334155", "Pai dos Elric, cheio de segredos."),
+      P("Ling Yao", "Príncipe", "Xing", "166534", "Príncipe de Xing em busca da imortalidade."),
+      P("Pai (Father)", "Vilão", "Homúnculo", "450a0a", "Líder dos homúnculos e grande antagonista."),
+      P("Envy", "Homúnculo", "Inveja", "14532d", "Homúnculo que muda de forma."),
+      P("Lust", "Homúnculo", "Luxúria", "6d28d9", "Homúnculo de unhas afiadas."),
+      P("King Bradley", "Líder", "Fuhrer", "1f2937", "Líder militar e figura-chave da trama.")
+    ]),
+
+  A("One Punch Man", 8.9, "Popular", ["Ação", "Comédia", "Fantasia"], "2015", "Madhouse / J.C.Staff", "24", "ca8a04",
+    "Saitama, um herói tão forte que derrota qualquer inimigo com um único soco, procura um oponente à altura.",
+    ["Baseado no mangá de ONE, com arte de Yusuke Murata.", "Saitama derrota qualquer inimigo com um soco.", "Genos é o discípulo ciborgue de Saitama.", "A série mistura humor e ação."],
+    { Ação: 96, Comédia: 98, Fantasia: 85, Drama: 70, Estratégia: 60 },
+    [
+      P("Saitama", "Herói", "Um soco", "ca8a04", "Herói imbatível que se destaca pela força e pelo tédio."),
+      P("Genos", "Ciborgue", "Discípulo de Saitama", "ea580c", "Ciborgue sério e dedicado que admira Saitama."),
+      P("Tatsumaki", "Esper", "Tornado Terrível", "166534", "Heroína de classe S com poderes psíquicos."),
+      P("Fubuki", "Heroína", "Furacão do Inferno", "7c3aed", "Heroína de classe B e líder de um grupo."),
+      P("Garou", "Caçador de heróis", "Artes marciais", "ea580c", "Lutador que se torna caçador de heróis."),
+      P("King", "Herói", "Rei", "475569", "Herói famoso por ser considerado o mais forte."),
+      P("Mumen Rider", "Herói", "Bicicleta", "0369a1", "Herói de coração enorme, apesar do pouco poder."),
+      P("Silver Fang (Bang)", "Herói", "Punho da Água", "9a3412", "Mestre de artes marciais de classe S."),
+      P("Speed-o'-Sound Sonic", "Ninja", "Velocidade", "1e1b4b", "Ninja de velocidade fantástica, rival de Saitama."),
+      P("Metal Bat", "Herói", "Taco", "92400e", "Herói de classe S, forte e sério."),
+      P("Boros", "Vilão", "Alien", "7f1d1d", "Líder alienígena de poder gigantesco.")
+    ]),
+
+  A("Chainsaw Man", 8.5, "Popular", ["Ação", "Terror", "Fantasia", "Comédia"], "2022", "MAPPA", "12", "991b1b",
+    "Denji, um jovem endividado, se funde com seu demônio de estimação Pochita e passa a trabalhar como caçador de demônios.",
+    ["Baseado no mangá de Tatsuki Fujimoto.", "Denji vira híbrido com Pochita.", "Foi produzido pelo MAPPA e estreou em 2022.", "Os demônios nascem do medo das pessoas."],
+    { Ação: 98, Terror: 85, Fantasia: 90, Comédia: 78, Drama: 82 },
+    [
+      P("Denji", "Protagonista", "Homem-Motosserra", "991b1b", "Jovem que se funde com Pochita e vira o Homem-Motosserra."),
+      P("Pochita", "Demônio", "Demônio da Motosserra", "ea580c", "Demônio da motosserra e melhor amigo de Denji."),
+      P("Power", "Demônio", "Demônio do Sangue", "be185d", "Demônio do sangue, impulsiva e orgulhosa."),
+      P("Aki Hayakawa", "Caçador", "Pacto com a Raposa", "1e3a8a", "Caçador sério e dedicado."),
+      P("Makima", "Chefe", "Controle", "9a3412", "Líder carismática e enigmática."),
+      P("Kobeni Higashiyama", "Caçadora", "Nova recruta", "ca8a04", "Caçadora tímida e assustada, mas de bom coração."),
+      P("Himeno", "Caçadora", "Pacto com o Fantasma", "6d28d9", "Caçadora experiente e debochada."),
+      P("Angel Devil", "Demônio", "Toque", "e5e7eb", "Demônio que rouba a vida por contato."),
+      P("Kishibe", "Caçador", "Mestre", "334155", "Caçador veterano e mestre de Denji e Power."),
+      P("Quanxi", "Caçadora", "Primeira Caçadora", "1e293b", "Caçadora lendária, de poder enorme."),
+      P("Shark Fiend (Beam)", "Demônio", "Tubarão", "0369a1", "Demônio tubarão, leal a Denji.")
+    ]),
+
+  A("Spy x Family", 8.7, "Popular", ["Ação", "Comédia"], "2022", "WIT Studio / CloverWorks", "37", "166534",
+    "Um espião, uma assassina e uma garota telepata formam uma família falsa e precisam esconder os segredos uns dos outros.",
+    ["Baseado no mangá de Tatsuya Endo.", "Loid é espião, Yor é assassina e Anya é telepata.", "Cada um esconde seu segredo da família.", "Foi produzido por WIT Studio e CloverWorks."],
+    { Comédia: 98, Ação: 85, Romance: 70, Drama: 78, Estratégia: 84 },
+    [
+      P("Loid Forger", "Espião", "Twilight", "166534", "Espião habilidoso que monta uma família de fachada."),
+      P("Anya Forger", "Telepata", "Leitura de mentes", "be185d", "Menina telepata, esperta e divertida."),
+      P("Yor Forger", "Assassina", "Princesa Espinho", "7f1d1d", "Assassina profissional que vive como mãe e esposa."),
+      P("Bond Forger", "Cachorro", "Premonição", "334155", "Cachorro com habilidade de ver o futuro."),
+      P("Yuri Briar", "Irmão de Yor", "Polícia secreta", "1e3a8a", "Agente da polícia secreta e irmão superprotetor."),
+      P("Franky Franklin", "Informante", "Informações", "ca8a04", "Amigo de Loid e fornecedor de informações."),
+      P("Sylvia Sherwood", "Chefe", "Handler", "6d28d9", "Chefe e supervisora de Loid."),
+      P("Damian Desmond", "Estudante", "Colega de Anya", "92400e", "Colega de Anya, orgulhoso e filho de um político."),
+      P("Becky Blackbell", "Estudante", "Amiga de Anya", "be123c", "Melhor amiga de Anya."),
+      P("Fiona Frost", "Agente", "Nightfall", "475569", "Agente do serviço secreto e colega de Loid.")
+    ]),
+
+  A("Cavaleiros do Zodíaco", 8.6, "Clássico", ["Ação", "Aventura", "Fantasia", "Shounen"], "1986", "Toei Animation", "114", "6d28d9",
+    "Seiya e seus amigos, os Cavaleiros de Bronze, lutam para proteger Atena e a Terra com o poder do Cosmo.",
+    ["Baseado no mangá de Masami Kurumada.", "As armaduras se dividem em Bronze, Prata e Ouro.", "Os Cavaleiros protegem a deusa Atena.", "A série é muito popular no Brasil."],
+    { Ação: 96, Aventura: 92, Fantasia: 96, Drama: 90, Amizade: 98 },
+    [
+      P("Seiya de Pégaso", "Cavaleiro de Bronze", "Meteoro de Pégaso", "1d4ed8", "Protagonista corajoso que luta por Atena."),
+      P("Shiryu de Dragão", "Cavaleiro de Bronze", "Dragão Nascente", "166534", "Cavaleiro calmo e de grande força."),
+      P("Hyoga de Cisne", "Cavaleiro de Bronze", "Pó de Diamante", "0891b2", "Cavaleiro do gelo, de muita frieza e lealdade."),
+      P("Shun de Andrômeda", "Cavaleiro de Bronze", "Corrente de Andrômeda", "be185d", "Cavaleiro gentil que luta apenas quando necessário."),
+      P("Ikki de Fênix", "Cavaleiro de Bronze", "Fênix", "991b1b", "Irmão de Shun, forte e solitário."),
+      P("Saori Kido (Atena)", "Deusa", "Atena", "e5e7eb", "Reencarnação de Atena e líder dos Cavaleiros."),
+      P("Mu de Áries", "Cavaleiro de Ouro", "Reparo de armaduras", "7c3aed", "Cavaleiro de Ouro calmo, que conserta armaduras."),
+      P("Aldebaran de Touro", "Cavaleiro de Ouro", "Grande Chifre", "92400e", "Cavaleiro de Ouro enorme e de grande coração."),
+      P("Saga de Gêmeos", "Cavaleiro de Ouro", "Explosão Galáctica", "334155", "Cavaleiro de Ouro de poder enorme."),
+      P("Máscara da Morte de Câncer", "Cavaleiro de Ouro", "Ondas do Inferno", "1e293b", "Cavaleiro de Ouro sombrio e temido."),
+      P("Aiolia de Leão", "Cavaleiro de Ouro", "Relâmpago de Plasma", "ca8a04", "Cavaleiro de Ouro de coragem inabalável."),
+      P("Shaka de Virgem", "Cavaleiro de Ouro", "Tesouro do Céu", "ca8a04", "Considerado o homem mais próximo de Deus."),
+      P("Dohko de Libra", "Cavaleiro de Ouro", "Cólera do Dragão", "166534", "Cavaleiro de Ouro sábio e antigo."),
+      P("Milo de Escorpião", "Cavaleiro de Ouro", "Agulha Escarlate", "991b1b", "Cavaleiro de Ouro orgulhoso e feroz."),
+      P("Camus de Aquário", "Cavaleiro de Ouro", "Caixão de Gelo", "0369a1", "Cavaleiro de Ouro do gelo e mestre de Hyoga.")
+    ])
+];
+
+let currentAnime = null;
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  renderPopular();
+  renderGenres("Todos");
+  renderClassics();
+  renderHomeCharacters();
+  renderRanking();
+  fillForumAnimeSelect();
+  renderComments();
+
+  document.getElementById("commentForm").addEventListener("submit", addComment);
+
+  // fecha a lista da pesquisa ao clicar fora ou apertar ESC
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-wrap")) closeDropdown();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeDropdown();
+  });
+});
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+function animeCard(anime) {
+  return `
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="anime-card" onclick="openAnime('${anime.nome.replace(/'/g, "\\'")}')">
+        <img class="anime-poster" src="${anime.poster}" alt="${anime.nome}">
+        <div class="anime-card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge badge-soft rounded-pill">${anime.tipo}</span>
+            <span class="rating">★ ${anime.nota}</span>
+          </div>
+          <h5>${anime.nome}</h5>
+          <div>
+            ${anime.generos.slice(0,3).map(g => `<span class="badge badge-soft me-1">${g}</span>`).join("")}
+          </div>
+          <button class="btn btn-sm btn-outline-neon mt-3 w-100">
+            Explorar <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPopular() {
+  document.getElementById("popularGrid").innerHTML =
+    animes.slice(0, 8).map(animeCard).join("");
+}
+
+function renderGenres(genre) {
+  const list = genre === "Todos"
+    ? animes
+    : animes.filter(a => a.generos.includes(genre));
+
+  document.getElementById("genreGrid").innerHTML =
+    list.map(animeCard).join("") ||
+    `<div class="col-12"><div class="empty-state">Nenhum anime encontrado nesse gênero.</div></div>`;
+}
+
+/* =========================================================
+   CLÁSSICOS - CAROUSEL
+   ========================================================= */
+function renderClassics() {
+  const classics = animes.filter(a => a.tipo.includes("Clássico"));
+
+  const groups = [];
+  for (let i = 0; i < classics.length; i += 4) {
+    groups.push(classics.slice(i, i + 4));
+  }
+
+  document.getElementById("classicSlides").innerHTML = groups.map((group, index) => `
+    <div class="carousel-item ${index === 0 ? "active" : ""}">
+      <div class="row g-4">
+        ${group.map(animeCard).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+/* =========================================================
+   PERSONAGENS HOME - CAROUSEL
+   ========================================================= */
+function renderHomeCharacters() {
+  const characters = animes.flatMap(a =>
+    a.personagens.slice(0, 1).map(p => ({...p, anime: a.nome}))
+  );
+
+  const groups = [];
+  for (let i = 0; i < characters.length; i += 4) {
+    groups.push(characters.slice(i, i + 4));
+  }
+
+  document.getElementById("characterSlides").innerHTML = groups.map((group, index) => `
+    <div class="carousel-item ${index === 0 ? "active" : ""}">
+      <div class="row g-4">
+        ${group.map(p => `
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="character-card">
+              <img src="${p.img}" alt="${p.nome}">
+              <div class="character-info">
+                <span class="badge badge-soft">${p.anime}</span>
+                <h5 class="mt-2">${p.nome}</h5>
+                <p class="text-secondary mb-0">${p.papel}</p>
+              </div>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+/* =========================================================
+   RANKING
+   ========================================================= */
+function renderRanking() {
+  const ranking = [...animes].sort((a,b) => b.nota - a.nota);
+
+  document.getElementById("rankingList").innerHTML = ranking.map((anime, index) => `
+    <button
+      class="list-group-item list-group-item-action bg-transparent text-white border-secondary d-flex align-items-center gap-3 py-3"
+      onclick="openAnime('${anime.nome.replace(/'/g, "\\'")}')">
+
+      <span class="fs-3 fw-bold text-secondary" style="width:50px;">
+        ${String(index + 1).padStart(2, "0")}
+      </span>
+
+      <img src="${anime.poster}" alt="${anime.nome}"
+           style="width:50px;height:70px;object-fit:cover;border-radius:8px;">
+
+      <div class="flex-grow-1 text-start">
+        <strong>${anime.nome}</strong>
+        <div class="text-secondary small">${anime.generos.join(" • ")}</div>
+      </div>
+
+      <span class="rating">★ ${anime.nota}</span>
+    </button>
+  `).join("");
+}
+
+/* =========================================================
+   PÁGINA DO ANIME
+   ========================================================= */
+function openAnime(name) {
+  currentAnime = animes.find(a => a.nome === name);
+
+  if (!currentAnime) return;
+
+  closeDropdown();
+
+  document.getElementById("homePage").style.display = "none";
+  document.querySelector(".footer").style.display = "none";
+  document.getElementById("animePage").style.display = "block";
+
+  window.scrollTo({top: 0, behavior: "smooth"});
+
+  document.getElementById("detailBanner").style.backgroundImage =
+    `url("${currentAnime.banner}")`;
+
+  document.getElementById("detailContent").innerHTML = `
+    <span class="badge badge-soft rounded-pill p-2 mb-3">${currentAnime.tipo}</span>
+
+    <h1 class="detail-title">${currentAnime.nome}</h1>
+
+    <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+      <span class="rating">★ ${currentAnime.nota}</span>
+      ${currentAnime.generos.map(g => `<span class="badge badge-soft">${g}</span>`).join("")}
+    </div>
+  `;
+
+  document.getElementById("detailSynopsis").textContent = currentAnime.sinopse;
+
+  document.getElementById("detailInfo").innerHTML = `
+    <h5 class="fw-bold mb-3">Informações</h5>
+    <div class="info-line"><span>Ano</span><strong>${currentAnime.ano}</strong></div>
+    <div class="info-line"><span>Estúdio</span><strong>${currentAnime.estudio}</strong></div>
+    <div class="info-line"><span>Episódios</span><strong>${currentAnime.episodios}</strong></div>
+    <div class="info-line"><span>Nota</span><strong class="rating">★ ${currentAnime.nota}</strong></div>
+  `;
+
+  renderDetailCharacters();
+  renderDetailCuriosities();
+  renderAttributes();
+  renderRelated();
+}
+
+function renderDetailCharacters() {
+  const slides = [];
+
+  for (let i = 0; i < currentAnime.personagens.length; i += 3) {
+    slides.push(currentAnime.personagens.slice(i, i + 3));
+  }
+
+  document.getElementById("detailCharacterSlides").innerHTML =
+    slides.map((group, index) => `
+      <div class="carousel-item ${index === 0 ? "active" : ""}">
+        <div class="row g-4">
+          ${group.map(p => `
+            <div class="col-12 col-md-4">
+              <div class="character-card">
+                <img src="${p.img}" alt="${p.nome}">
+                <div class="character-info">
+                  <span class="badge badge-soft">${p.papel}</span>
+                  <h5 class="mt-2">${p.nome}</h5>
+
+                  <p class="text-secondary small mb-2">${p.descricao}</p>
+
+                  <div class="small">
+                    <div class="d-flex justify-content-between">
+                      <span class="text-secondary">Idade</span>
+                      <strong>${p.idade}</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <span class="text-secondary">Altura</span>
+                      <strong>${p.altura}</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <span class="text-secondary">Destaque</span>
+                      <strong>${p.extra}</strong>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-sm btn-neon w-100 mt-3"
+                    onclick="openCharacter(${currentAnime.personagens.indexOf(p)})">
+                    Ver ficha completa
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `).join("");
+}
+
+function openCharacter(index) {
+  const p = currentAnime.personagens[index];
+
+  document.getElementById("modalCharacterName").textContent = p.nome;
+  document.getElementById("modalCharacterImage").src = p.img;
+  document.getElementById("modalCharacterImage").alt = p.nome;
+  document.getElementById("modalCharacterDescription").textContent = p.descricao;
+
+  document.getElementById("modalCharacterInfo").innerHTML = `
+    <div class="info-box">
+      <div class="info-line"><span>Anime</span><strong>${currentAnime.nome}</strong></div>
+      <div class="info-line"><span>Função</span><strong>${p.papel}</strong></div>
+      <div class="info-line"><span>Idade</span><strong>${p.idade}</strong></div>
+      <div class="info-line"><span>Altura</span><strong>${p.altura}</strong></div>
+      <div class="info-line"><span>Destaque</span><strong>${p.extra}</strong></div>
+    </div>
+  `;
+
+  new bootstrap.Modal(document.getElementById("characterModal")).show();
+}
+
+function renderDetailCuriosities() {
+  document.getElementById("detailCuriosities").innerHTML =
+    currentAnime.curiosidades.map((c, index) => `
+      <div class="col-md-6">
+        <div class="curiosity-card">
+          <div class="curiosity-number">${String(index + 1).padStart(2, "0")}</div>
+          <p class="mb-0 text-secondary">${c}</p>
+        </div>
+      </div>
+    `).join("");
+}
+
+function renderAttributes() {
+  document.getElementById("detailAttributes").innerHTML =
+    Object.entries(currentAnime.atributos).map(([nome, valor]) => `
+      <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+          <strong>${nome}</strong>
+          <span class="text-secondary">${valor}/100</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" style="width:${valor}%"></div>
+        </div>
+      </div>
+    `).join("");
+}
+
+function renderRelated() {
+  // prioriza os animes com mais gêneros em comum
+  const related = animes
+    .filter(a => a.nome !== currentAnime.nome)
+    .map(a => ({ a, c: a.generos.filter(g => currentAnime.generos.includes(g)).length }))
+    .filter(x => x.c > 0)
+    .sort((x, y) => y.c - x.c)
+    .slice(0, 4)
+    .map(x => x.a);
+
+  document.getElementById("relatedGrid").innerHTML =
+    related.map(animeCard).join("");
+}
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
+function showHome() {
+  document.getElementById("homePage").style.display = "block";
+  document.querySelector(".footer").style.display = "block";
+  document.getElementById("animePage").style.display = "none";
+}
+
+function goToForum() {
+  showHome();
+
+  setTimeout(() => {
+    document.getElementById("forum").scrollIntoView({
+      behavior: "smooth"
+    });
+  }, 100);
+}
+
+/* =========================================================
+   FILTRO
+   ========================================================= */
+function filterGenre(genre) {
+  renderGenres(genre);
+
+  document.getElementById("generos").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+/* =========================================================
+   BUSCA
+   - Ignora acentos e maiúsculas.
+   - 1 letra: mostra os animes cujo nome (ou alguma palavra do nome)
+     começa com ela.
+   - 2+ letras: também acha pelo meio do nome, personagem,
+     gênero e estúdio.
+   ========================================================= */
+const norm = t => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+function searchResults(raw) {
+  const q = norm(raw.trim());
+  if (!q) return [];
+
+  const startsWord = s => norm(s).split(/[^a-z0-9]+/).some(w => w.startsWith(q));
+
+  return animes
+    .map(a => {
+      let score = 0, hint = "";
+      const nome = norm(a.nome);
+
+      if (nome.startsWith(q)) score = 100;
+      else if (startsWord(a.nome)) score = 80;
+      else if (q.length > 1 && nome.includes(q)) score = 60;
+      else if (q.length > 1) {
+        const p = a.personagens.find(p => norm(p.nome).includes(q));
+        const g = a.generos.find(g => norm(g).includes(q));
+        if (p) { score = 40; hint = "Personagem: " + p.nome; }
+        else if (g) { score = 20; hint = "Gênero: " + g; }
+        else if (norm(a.estudio).includes(q)) { score = 10; hint = "Estúdio: " + a.estudio; }
+      }
+
+      return { a, score, hint };
+    })
+    .filter(r => r.score > 0)
+    .sort((x, y) => y.score - x.score || x.a.nome.localeCompare(y.a.nome, "pt-BR"));
+}
+
+function closeDropdown() {
+  const box = document.getElementById("searchDropdown");
+  if (box) box.classList.add("hidden");
+}
+
+function liveSearch() {
+  const input = document.getElementById("searchInput");
+  const box = document.getElementById("searchDropdown");
+
+  if (!input.value.trim()) {
+    box.classList.add("hidden");
+    return;
+  }
+
+  const results = searchResults(input.value);
+
+  if (!results.length) {
+    box.innerHTML = `<div class="empty-state py-3">Nenhum anime encontrado 😭</div>`;
+    box.classList.remove("hidden");
+    return;
+  }
+
+  const top = results.slice(0, 8);
+
+  box.innerHTML = top.map(({ a, hint }) => `
+    <div class="search-item" onclick="pickSearch(${animes.indexOf(a)})">
+      <img src="${a.poster}" alt="${a.nome}">
+      <div class="flex-grow-1">
+        <strong>${a.nome}</strong>
+        <div><small>${hint || a.generos.slice(0, 3).join(" • ")}</small></div>
+      </div>
+      <span class="rating small">★ ${a.nota}</span>
+    </div>
+  `).join("") + (results.length > top.length
+    ? `<div class="search-more" onclick="submitSearch()">Ver todos os ${results.length} resultados</div>`
+    : "");
+
+  box.classList.remove("hidden");
+}
+
+function pickSearch(index) {
+  closeDropdown();
+  openAnime(animes[index].nome);
+}
+
+function submitSearch() {
+  const value = document.getElementById("searchInput").value.trim();
+  if (!value) return;
+
+  const results = searchResults(value);
+
+  if (!results.length) {
+    alert("Nenhum anime encontrado 😭");
+    return;
+  }
+
+  if (results.length === 1) {
+    openAnime(results[0].a.nome);
+    return;
+  }
+
+  closeDropdown();
+  showHome();
+
+  document.getElementById("searchTitle").textContent =
+    `Resultados para "${value}" (${results.length})`;
+  document.getElementById("searchGrid").innerHTML =
+    results.map(r => animeCard(r.a)).join("");
+  document.getElementById("searchSection").classList.remove("hidden");
+
+  setTimeout(() => {
+    document.getElementById("searchSection").scrollIntoView({ behavior: "smooth" });
+  }, 100);
+}
+
+function clearSearch() {
+  document.getElementById("searchInput").value = "";
+  document.getElementById("searchSection").classList.add("hidden");
+  closeDropdown();
+}
+
+/* =========================================================
+   FÓRUM
+   LocalStorage mantém os comentários neste navegador.
+   ========================================================= */
+function fillForumAnimeSelect() {
+  const select = document.getElementById("commentAnime");
+
+  select.innerHTML = `
+    <option value="">Selecione um anime</option>
+    ${animes.map(a => `<option value="${a.nome}">${a.nome}</option>`).join("")}
+  `;
+}
+
+function getComments() {
+  return JSON.parse(localStorage.getItem("animeverseComments") || "[]");
+}
+
+function saveComments(comments) {
+  localStorage.setItem("animeverseComments", JSON.stringify(comments));
+}
+
+function addComment(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("commentName").value.trim();
+  const anime = document.getElementById("commentAnime").value;
+  const text = document.getElementById("commentText").value.trim();
+
+  if (!name || !anime || !text) return;
+
+  const comments = getComments();
+
+  comments.unshift({
+    id: Date.now(),
+    name,
+    anime,
+    text,
+    date: new Date().toLocaleDateString("pt-BR")
+  });
+
+  saveComments(comments);
+  renderComments();
+
+  document.getElementById("commentForm").reset();
+
+  alert("Comentário publicado! 💜");
+}
+
+function renderComments() {
+  const comments = getComments();
+  const container = document.getElementById("commentsList");
+
+  if (!comments.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <i class="bi bi-chat-heart fs-1 d-block mb-3"></i>
+        Ainda não há comentários.
+        Seja a primeira pessoa a recomendar um anime!
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = comments.map(comment => `
+    <div class="comment">
+      <div class="d-flex justify-content-between align-items-start gap-3">
+        <div>
+          <strong>${escapeHTML(comment.name)}</strong>
+          <span class="badge badge-soft ms-2">${escapeHTML(comment.anime)}</span>
+        </div>
+        <small>${comment.date}</small>
+      </div>
+
+      <p class="text-secondary mt-2 mb-0">
+        ${escapeHTML(comment.text)}
+      </p>
+    </div>
+  `).join("");
+}
+
+function clearComments() {
+  if (confirm("Tem certeza que deseja apagar os comentários deste navegador?")) {
+    localStorage.removeItem("animeverseComments");
+    renderComments();
+  }
+}
+
+function escapeHTML(text) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+</script>
+
+</body>
+</html>
